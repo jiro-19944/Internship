@@ -17,18 +17,20 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ImageView imageView = (ImageView) findViewById(R.id.image_view);
         RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.main_layout);
-        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radio_group);
-        RadioButton radio1 = (RadioButton) findViewById(R.id.radio1);
-        RadioButton radio2 = (RadioButton) findViewById(R.id.radio2);
-        RadioButton radio3 = (RadioButton) findViewById(R.id.radio3);
-        RadioButton radio4 = (RadioButton) findViewById(R.id.radio4);
-        RadioButton radio5 = (RadioButton) findViewById(R.id.radio5);
+        ImageView thisImageView = (ImageView) findViewById(R.id.this_image_view);
+        ImageView nextImageView = (ImageView) findViewById(R.id.next_image_view);
+        ImageView prevImageView = (ImageView) findViewById(R.id.prev_image_view);
 
-        OnTouch onTouch = new OnTouch(imageView, relativeLayout, radioGroup, radio1, radio2, radio3, radio4, radio5);
+//        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radio_group);
+//        RadioButton radio1 = (RadioButton) findViewById(R.id.radio1);
+//        RadioButton radio2 = (RadioButton) findViewById(R.id.radio2);
+//        RadioButton radio3 = (RadioButton) findViewById(R.id.radio3);
+
+        OnTouch onTouch = new OnTouch(thisImageView, relativeLayout, nextImageView, prevImageView /*,
+                                        radioGroup, radio1, radio2, radio3*/);
         onTouch.getOnTouch();
-        onTouch.imageFromRadioButton();
+        //onTouch.imageFromRadioButton();
     }
 }
 

@@ -12,23 +12,28 @@ import android.widget.Toast;
 
 public class OnTouch extends AppCompatActivity
 {
+    RelativeLayout relativeLayout;
     private float fromPosition;
     private float toPosition;
     private int index;
+    private int nextIndex;
+    private int prevIndex;
     private int[] images;
-    private ImageView imgageView;
-    RelativeLayout relativeLayout;
-    RadioGroup radioGroup;
-    RadioButton radio1;
-    RadioButton radio2;
-    RadioButton radio3;
-    RadioButton radio4;
-    RadioButton radio5;
+    private ImageView thisImageView;
+    private ImageView prevImageView;
+    private ImageView nextImageView;
+//  private RadioGroup radioGroup;
+//  private  RadioButton radio1;
+//  private RadioButton radio2;
+//  private  RadioButton radio3;
 
-    OnTouch(ImageView imageView, RelativeLayout relativeLayout, RadioGroup radioGroup, RadioButton r1,
-            RadioButton r2, RadioButton r3, RadioButton r4, RadioButton r5)
+    OnTouch(ImageView thisImageView, RelativeLayout relativeLayout, ImageView nextImageView, ImageView prevImageView/*, RadioGroup radioGroup, RadioButton r1,
+            RadioButton r2, RadioButton r3*/)
     {
+        this.relativeLayout = relativeLayout;
         this.index = 4;
+        this.nextIndex = index + 1;
+        this.prevIndex = index - 1;
         this.images = new int[]{R.drawable.img1,
                 R.drawable.img2,
                 R.drawable.img3,
@@ -36,14 +41,14 @@ public class OnTouch extends AppCompatActivity
                 R.drawable.img5,
                 R.drawable.img6,
                 R.drawable.img7};
-        this.imgageView = imageView;
-        this.relativeLayout = relativeLayout;
-        this.radioGroup = radioGroup;
-        this.radio1 = r1;
-        this.radio2 = r2;
-        this.radio3 = r3;
-        this.radio4 = r4;
-        this.radio5 = r5;
+        this.thisImageView = thisImageView;
+        this.nextImageView = nextImageView;
+        this.prevImageView = prevImageView;
+
+//        this.radioGroup = radioGroup;
+//        this.radio1 = r1;
+//        this.radio2 = r2;
+//        this.radio3 = r3;
     };
 
     public void getOnTouch()
@@ -69,8 +74,11 @@ public class OnTouch extends AppCompatActivity
                                 {
                                     index = 0;
                                 }
-                                imgageView.setImageResource(images[index]);
-                                radioButtonFromImage(index);
+                                nextIndexFromIndex(index);
+                                prevIndexFromIndex(index);
+                                showImages();
+
+                                //radioButtonFromImage(index);
                             }
                             else if (fromPosition < toPosition)
                             {
@@ -79,8 +87,11 @@ public class OnTouch extends AppCompatActivity
                                 {
                                     index = (getLenghtImages() - 1);
                                 }
-                                imgageView.setImageResource(images[index]);
-                                radioButtonFromImage(index);
+                                nextIndexFromIndex(index);
+                                prevIndexFromIndex(index);
+                                showImages();
+
+                                //radioButtonFromImage(index);
                             }
                             break;
                         default:
@@ -92,80 +103,109 @@ public class OnTouch extends AppCompatActivity
         }
     }
 
-    public void radioButtonFromImage(int index)
+    private int nextIndexFromIndex(int index)
     {
-        if(0 == index)
+        nextIndex = index + 1;
+        if(nextIndex > (getLenghtImages() - 1))
         {
-            radio1.setChecked(true);
+            nextIndex = 0;
         }
-        else if(1 == index) {
-            radio2.setChecked(true);
-        }
-        else if((getLenghtImages() - 1) == index)
-        {
-            radio5.setChecked(true);
-        }
-        else if((getLenghtImages() - 2) == index)
-        {
-            radio4.setChecked(true);
-        }
-        else
-        {
-            radio3.setChecked(true);
-        }
+
+        return nextIndex;
     }
 
-    public void imageFromRadioButton()
+    private int prevIndexFromIndex(int index)
     {
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        prevIndex = index - 1;
+        if(prevIndex < 0)
         {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId)
-            {
-                View radioButton = radioGroup.findViewById(checkedId);
-                int i = radioGroup.indexOfChild(radioButton);
+            prevIndex = (getLenghtImages() - 1);
+        }
 
-                if(0 == i)
-                {
-                    //radio1.setChecked(true);
-                    imgageView.setImageResource(images[i]);
-                    index = i;
-                }
-                else if(1 == i)
-                {
-                    //radio2.setChecked(true);
-                    imgageView.setImageResource(images[i]);
-                    index = i;
-                }
-                else if(2 == i)
-                {
-                    //radio3.setChecked(true);
-                    imgageView.setImageResource(images[getHalfOfLenghtImages()]);
-                    index = getHalfOfLenghtImages();
-                }
-                else if(3 == i)
-                {
-                    //radio4.setChecked(true);
-                    imgageView.setImageResource(images[getLenghtImages() - 2]);
-                    index = getLenghtImages() - 2;
-                }
-                else if(4 == i)
-                {
-                    //radio5.setChecked(true);
-                    imgageView.setImageResource(images[getLenghtImages() - 1]);
-                    index = getLenghtImages() - 1;
-                }
-            }
-        });
+        return prevIndex;
     }
+
+    private void showImages()
+    {
+        thisImageView.setImageResource(images[index]);
+        nextImageView.setImageResource(images[nextIndex]);
+        prevImageView.setImageResource(images[prevIndex]);
+    }
+
+//    public void radioButtonFromImage(int index)
+//    {
+//        if(0 == index)
+//        {
+//            radio1.setChecked(true);
+//        }
+//        else if(1 == index) {
+//            radio2.setChecked(true);
+//        }
+//        else if((getLenghtImages() - 1) == index)
+//        {
+//            radio5.setChecked(true);
+//        }
+//        else if((getLenghtImages() - 2) == index)
+//        {
+//            radio4.setChecked(true);
+//        }
+//        else
+//        {
+//            radio3.setChecked(true);
+//        }
+//    }
+
+//    public void imageFromRadioButton()
+//    {
+//        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+//        {
+//            @Override
+//            public void onCheckedChanged(RadioGroup group, int checkedId)
+//            {
+//                View radioButton = radioGroup.findViewById(checkedId);
+//                int i = radioGroup.indexOfChild(radioButton);
+//
+//                if(0 == i)
+//                {
+//                    //radio1.setChecked(true);
+//                    imgageView.setImageResource(images[i]);
+//                    index = i;
+//                }
+//                else if(1 == i)
+//                {
+//                    //radio2.setChecked(true);
+//                    imgageView.setImageResource(images[i]);
+//                    index = i;
+//                }
+//                else if(2 == i)
+//                {
+//                    //radio3.setChecked(true);
+//                    imgageView.setImageResource(images[getHalfOfLenghtImages()]);
+//                    index = getHalfOfLenghtImages();
+//                }
+//                else if(3 == i)
+//                {
+//                    //radio4.setChecked(true);
+//                    imgageView.setImageResource(images[getLenghtImages() - 2]);
+//                    index = getLenghtImages() - 2;
+//                }
+//                else if(4 == i)
+//                {
+//                    //radio5.setChecked(true);
+//                    imgageView.setImageResource(images[getLenghtImages() - 1]);
+//                    index = getLenghtImages() - 1;
+//                }
+//            }
+//        });
+//    }
 
     public int getLenghtImages()
     {
         return this.images.length;
     }
 
-    public int getHalfOfLenghtImages()
-    {
-        return (getLenghtImages() / 2 + 1);
-    }
+//    public int getHalfOfLenghtImages()
+//    {
+//        return getLenghtImages() / 2 ;
+//    }
 }
