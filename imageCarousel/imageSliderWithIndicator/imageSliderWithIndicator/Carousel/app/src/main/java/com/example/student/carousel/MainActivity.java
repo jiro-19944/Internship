@@ -22,13 +22,13 @@ public class MainActivity extends AppCompatActivity
         ImageView nextImageView = (ImageView) findViewById(R.id.next_image_view);
         ImageView prevImageView = (ImageView) findViewById(R.id.prev_image_view);
 
-//        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radio_group);
-//        RadioButton radio1 = (RadioButton) findViewById(R.id.radio1);
-//        RadioButton radio2 = (RadioButton) findViewById(R.id.radio2);
-//        RadioButton radio3 = (RadioButton) findViewById(R.id.radio3);
+        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radio_group);
+        RadioButton radio1 = (RadioButton) findViewById(R.id.radio1);
+        RadioButton radio2 = (RadioButton) findViewById(R.id.radio2);
+        RadioButton radio3 = (RadioButton) findViewById(R.id.radio3);
 
-        OnTouch onTouch = new OnTouch(thisImageView, relativeLayout, nextImageView, prevImageView /*,
-                                        radioGroup, radio1, radio2, radio3*/);
+        OnTouch onTouch = new OnTouch(thisImageView, relativeLayout, nextImageView, prevImageView,
+                                        radioGroup, radio1, radio2, radio3);
         onTouch.getOnTouch();
         //onTouch.imageFromRadioButton();
     }

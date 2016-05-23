@@ -10,12 +10,13 @@
 
     <ImageView
         android:id="@+id/next_image_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_marginBottom="250dp"
         android:layout_marginLeft="210dp"
         android:layout_marginTop="130dp"
-        android:src="@drawable/img1" />
+        android:scaleType="fitXY"
+        android:src="@drawable/img2" />
 
     <ImageView
         android:id="@+id/prev_image_view"
@@ -24,7 +25,8 @@
         android:layout_marginBottom="250dp"
         android:layout_marginRight="210dp"
         android:layout_marginTop="130dp"
-        android:src="@drawable/img2" />
+        android:scaleType="fitXY"
+        android:src="@drawable/img7" />
 
 
     <ImageView
@@ -35,8 +37,8 @@
         android:layout_marginLeft="100dp"
         android:layout_marginRight="100dp"
         android:layout_marginTop="250dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/img4"
+        android:scaleType="fitXY"
+        android:src="@drawable/img1"
 
         />
 
@@ -53,13 +55,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/radio1"
-            android:checked="false" />
+            android:checked="true" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/radio2"
-            android:checked="true" />
+            android:checked="false" />
 
         <RadioButton
             android:layout_width="wrap_content"

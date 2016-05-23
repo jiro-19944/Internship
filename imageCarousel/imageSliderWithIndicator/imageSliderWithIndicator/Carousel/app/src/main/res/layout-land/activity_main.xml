@@ -6,33 +6,47 @@
     android:background="@drawable/background"
     android:id="@+id/main_layout"
     tools:context="com.example.student.carousel.MainActivity">
-    <LinearLayout
+
+
+    <ImageView
+        android:id="@+id/next_image_view"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/linearLayout"
-        android:layout_marginLeft="200dp"
+        android:layout_marginBottom="200dp"
+        android:layout_marginLeft="350dp"
+        android:layout_marginTop="20dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/img2" />
+
+    <ImageView
+        android:id="@+id/prev_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="200dp"
+        android:layout_marginRight="350dp"
+        android:layout_marginTop="20dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/img7" />
+
+
+    <ImageView
+        android:id="@+id/this_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginRight="200dp">
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginTop="100dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/img1"
 
-        <!--img width height-->
+        />
 
-
-            <ImageView
-                android:id="@+id/bckgrndImageView8"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/img2"
-                 />
-
-    </LinearLayout>
 
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/radio_group"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:orientation="horizontal">
@@ -47,26 +61,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/radio2"
-            android:checked="false" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/radio3"
             android:checked="true" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/radio4"
+            android:id="@+id/radio3"
             android:checked="false" />
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/radio5"
-            android:checked="false" />
-
 
     </RadioGroup>
 
