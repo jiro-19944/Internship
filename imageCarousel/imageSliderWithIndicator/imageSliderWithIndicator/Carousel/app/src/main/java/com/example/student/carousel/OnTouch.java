@@ -27,9 +27,11 @@ public class OnTouch extends AppCompatActivity
     private  RadioButton radio1;
     private RadioButton radio2;
     private  RadioButton radio3;
+    private RadioButton radio4;
+    private  RadioButton radio5;
 
     OnTouch(ImageView thisImageView, RelativeLayout relativeLayout, ImageView nextImageView, ImageView prevImageView, RadioGroup radioGroup, RadioButton r1,
-            RadioButton r2, RadioButton r3)
+            RadioButton r2, RadioButton r3, RadioButton r4, RadioButton r5)
     {
         this.relativeLayout = relativeLayout;
         this.index = 0;
@@ -50,22 +52,28 @@ public class OnTouch extends AppCompatActivity
         this.radio1 = r1;
         this.radio2 = r2;
         this.radio3 = r3;
+        this.radio4 = r4;
+        this.radio5 = r5;
     };
 
     public void getOnTouch()
     {
         if (relativeLayout != null)
         {
-            relativeLayout.setOnTouchListener(new RelativeLayout.OnTouchListener() {
+            relativeLayout.setOnTouchListener(new RelativeLayout.OnTouchListener()
+            {
                 @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    switch (event.getAction()) {
+                public boolean onTouch(View v, MotionEvent event)
+                {
+                    switch (event.getAction())
+                    {
                         case MotionEvent.ACTION_DOWN:
                             fromPosition = event.getX();
                             break;
                         case MotionEvent.ACTION_UP:
                             toPosition = event.getX();
-                            if (fromPosition > toPosition) {
+                            if (fromPosition > toPosition)
+                            {
                                 ++index;
                                 verifyIndex();
                                 nextIndexFromIndex(index);
@@ -73,7 +81,9 @@ public class OnTouch extends AppCompatActivity
                                 updateActiveImages();
                                 showImages();
                                 radioButtonFromImage("next");
-                            } else if (fromPosition < toPosition) {
+                            }
+                            else if (fromPosition < toPosition)
+                            {
                                 --index;
                                 verifyIndex();
                                 nextIndexFromIndex(index);
@@ -134,6 +144,7 @@ public class OnTouch extends AppCompatActivity
         thisImageView.setImageResource(activeImages[1]);
         nextImageView.setImageResource(activeImages[2]);
         prevImageView.setImageResource(activeImages[0]);
+
     }
 
     public void radioButtonFromImage(String action)
@@ -149,27 +160,41 @@ public class OnTouch extends AppCompatActivity
                 {
                     radio3.setChecked(true);
                 }
-                else
+                else if(radioGroup.getCheckedRadioButtonId() == radio3.getId())
                 {
-                    radio1.setChecked(true);
+                    radio4.setChecked(true);
                 }
+                firstLastRadioButton();
                 break;
             case "prev":
-                if(radioGroup.getCheckedRadioButtonId() == radio1.getId())
+                if(radioGroup.getCheckedRadioButtonId() == radio5.getId())
+                {
+                    radio4.setChecked(true);
+                }
+                else if(radioGroup.getCheckedRadioButtonId() == radio4.getId())
                 {
                     radio3.setChecked(true);
                 }
-                else if(radioGroup.getCheckedRadioButtonId() == radio2.getId())
-                {
-                    radio1.setChecked(true);
-                }
-                else
+                else if(radioGroup.getCheckedRadioButtonId() == radio3.getId())
                 {
                     radio2.setChecked(true);
                 }
+                firstLastRadioButton();
                 break;
             default:
                 break;
+        }
+    }
+
+    private void firstLastRadioButton()
+    {
+        if(0 == index)
+        {
+            radio1.setChecked(true);
+        }
+        else if(getLenghtImages() - 1 == index)
+        {
+            radio5.setChecked(true);
         }
     }
 

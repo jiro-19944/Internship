@@ -26,9 +26,11 @@ public class MainActivity extends AppCompatActivity
         RadioButton radio1 = (RadioButton) findViewById(R.id.radio1);
         RadioButton radio2 = (RadioButton) findViewById(R.id.radio2);
         RadioButton radio3 = (RadioButton) findViewById(R.id.radio3);
+        RadioButton radio4 = (RadioButton) findViewById(R.id.radio4);
+        RadioButton radio5 = (RadioButton) findViewById(R.id.radio5);
 
         OnTouch onTouch = new OnTouch(thisImageView, relativeLayout, nextImageView, prevImageView,
-                                        radioGroup, radio1, radio2, radio3);
+                                        radioGroup, radio1, radio2, radio3, radio4, radio5);
         onTouch.getOnTouch();
         //onTouch.imageFromRadioButton();
     }
