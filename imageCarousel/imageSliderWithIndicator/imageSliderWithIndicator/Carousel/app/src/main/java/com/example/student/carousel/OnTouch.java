@@ -20,17 +20,17 @@ public class OnTouch extends AppCompatActivity
     private int prevIndex;
     private int[] images;
     private int[] activeImages;
-    private ImageView thisImageView;
+    private ImageView currentImageView;
     private ImageView prevImageView;
     private ImageView nextImageView;
     private RadioGroup radioGroup;
-    private  RadioButton radio1;
+    private RadioButton radio1;
     private RadioButton radio2;
-    private  RadioButton radio3;
+    private RadioButton radio3;
     private RadioButton radio4;
-    private  RadioButton radio5;
+    private RadioButton radio5;
 
-    OnTouch(ImageView thisImageView, RelativeLayout relativeLayout, ImageView nextImageView, ImageView prevImageView, RadioGroup radioGroup, RadioButton r1,
+    OnTouch(ImageView currentImageView, RelativeLayout relativeLayout, ImageView nextImageView, ImageView prevImageView, RadioGroup radioGroup, RadioButton r1,
             RadioButton r2, RadioButton r3, RadioButton r4, RadioButton r5)
     {
         this.relativeLayout = relativeLayout;
@@ -45,7 +45,7 @@ public class OnTouch extends AppCompatActivity
                 R.drawable.img6,
                 R.drawable.img7};
         this.activeImages = new int[]{images[0], images[1], images[2]};
-        this.thisImageView = thisImageView;
+        this.currentImageView = currentImageView;
         this.nextImageView = nextImageView;
         this.prevImageView = prevImageView;
         this.radioGroup = radioGroup;
@@ -141,7 +141,7 @@ public class OnTouch extends AppCompatActivity
 
     private void showImages()
     {
-        thisImageView.setImageResource(activeImages[1]);
+        currentImageView.setImageResource(activeImages[1]);
         nextImageView.setImageResource(activeImages[2]);
         prevImageView.setImageResource(activeImages[0]);
 
