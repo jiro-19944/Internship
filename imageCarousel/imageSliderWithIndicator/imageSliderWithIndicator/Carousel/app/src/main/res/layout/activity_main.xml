@@ -8,37 +8,35 @@
     tools:context="com.example.student.carousel.MainActivity">
 
 
-    <ImageView
-        android:id="@+id/next_image_view"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginBottom="250dp"
-        android:layout_marginLeft="210dp"
-        android:layout_marginTop="130dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/img2" />
+    <!--<ImageView-->
+        <!--android:id="@+id/next_image_view"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="fill_parent"-->
+        <!--android:layout_marginBottom="250dp"-->
+        <!--android:layout_marginLeft="210dp"-->
+        <!--android:layout_marginTop="150dp"-->
+        <!--android:scaleType="fitXY"-->
+        <!--android:src="@drawable/img2" />-->
 
-    <ImageView
-        android:id="@+id/prev_image_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="250dp"
-        android:layout_marginRight="210dp"
-        android:layout_marginTop="130dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/img7" />
+    <!--<ImageView-->
+        <!--android:id="@+id/prev_image_view"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="250dp"-->
+        <!--android:layout_marginRight="210dp"-->
+        <!--android:layout_marginTop="150dp"-->
+        <!--android:scaleType="fitXY"-->
+        <!--android:src="@drawable/img7" />-->
 
 
     <ImageView
         android:id="@+id/this_image_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="100dp"
-        android:layout_marginTop="250dp"
+        android:layout_marginBottom="28dp"
+
         android:scaleType="fitXY"
-        android:src="@drawable/img1"
+        android:src="@drawable/img5"
 
         />
 
