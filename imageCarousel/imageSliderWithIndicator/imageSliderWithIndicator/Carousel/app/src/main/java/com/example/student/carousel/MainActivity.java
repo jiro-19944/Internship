@@ -1,21 +1,25 @@
 package com.example.student.carousel;
 
+import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
-public class MainActivity extends AppCompatActivity
-{
+public class MainActivity extends AppCompatActivity {
     private int selectedTest;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -26,18 +30,27 @@ public class MainActivity extends AppCompatActivity
         ImageView nextImageView = (ImageView) findViewById(R.id.next_image_view);
         ImageView prevImageView = (ImageView) findViewById(R.id.prev_image_view);
 
-//------------------ set images positions --------------------------------
-
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
         int width = metrics.widthPixels;
         int height = metrics.heightPixels;
 
+        Display display = ((WindowManager) this.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        int rotation = display.getRotation();
+
+        System.out.println("------  rotation  -------- " + rotation);
+        System.out.println("------ landscape width  -------- " + width);
+        System.out.println("------ landscape height -------- " + height);
+
+
+//------------------ set images positions --------------------------------
+
+
         ImagePosition imagePosition = new ImagePosition(width, height);
-        imagePosition.setCurrentImagePosition(currentImageView);
-        imagePosition.setNextImagePosition(nextImageView);
-        imagePosition.setPrevImagePosition(prevImageView);
+        imagePosition.setCurrentImagePosition(currentImageView, rotation);
+        imagePosition.setNextImagePosition(nextImageView, rotation);
+        imagePosition.setPrevImagePosition(prevImageView, rotation);
 
 //------------------- get radio group and radio buttons from XML by id ---------------------------------
 
@@ -53,10 +66,13 @@ public class MainActivity extends AppCompatActivity
 
 
         OnTouch onTouch = new OnTouch(currentImageView, relativeLayout, nextImageView, prevImageView,
-                                        radioGroup, radio1, radio2, radio3, radio4, radio5);
+                radioGroup, radio1, radio2, radio3, radio4, radio5);
         onTouch.getOnTouch();
         //onTouch.imageFromRadioButton();
     }
+
+    //Get current screen orientation
+
 }
 
 

@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:scaleType="fitXY"
-        android:src="@drawable/img7"
+        android:src="@drawable/bob3"
         app:sriv_left_top_corner_radius="30dp"
         app:sriv_right_top_corner_radius="30dp"
         app:sriv_left_bottom_corner_radius="30dp"
@@ -69,23 +69,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/radio1"
+            android:clickable="false"
             android:checked="true" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:clickable="false"
             android:id="@+id/radio2"
             android:checked="false" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:clickable="false"
             android:id="@+id/radio3"
             android:checked="false" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:clickable="false"
             android:id="@+id/radio4"
             android:checked="false" />
 
@@ -93,6 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/radio5"
+            android:clickable="false"
             android:checked="false" />
 
     </RadioGroup>

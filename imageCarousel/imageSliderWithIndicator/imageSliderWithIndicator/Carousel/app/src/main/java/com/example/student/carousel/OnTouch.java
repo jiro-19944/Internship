@@ -38,12 +38,18 @@ public class OnTouch extends AppCompatActivity
         this.nextIndex = index + 1;
         this.prevIndex = index - 1;
         this.images = new int[]{R.drawable.img1,
-                R.drawable.img2,
-                R.drawable.img3,
-                R.drawable.img4,
-                R.drawable.img5,
-                R.drawable.img6,
-                R.drawable.img7};
+                                R.drawable.img2,
+                                R.drawable.img3,
+                                R.drawable.img4,
+                                R.drawable.img5,
+                                R.drawable.img6,
+                                R.drawable.img7,
+                                R.drawable.img8,
+                                R.drawable.img9,
+                                R.drawable.img10,
+                                R.drawable.bob1,
+                                R.drawable.bob2,
+                                R.drawable.bob3};
         this.activeImages = new int[]{images[0], images[1], images[2]};
         this.currentImageView = currentImageView;
         this.nextImageView = nextImageView;
