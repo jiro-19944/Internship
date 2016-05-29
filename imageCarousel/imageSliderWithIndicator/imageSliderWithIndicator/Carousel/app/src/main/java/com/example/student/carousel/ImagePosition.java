@@ -45,16 +45,12 @@ public class ImagePosition extends AppCompatActivity
 
         if(0 == rotation || 2 == rotation)
         {
-            PortraitCurrentImagePosition();
+            currentImagePositionPortrait();
         }
         else if(1 == rotation || 3 == rotation)
         {
-            landscdapeCurrentImagePosition();
+            currentImagePositionLandscdape();
         }
-
-        System.out.println("------  width  -------- " + width);
-        System.out.println("------  height -------- " + height);
-
         currentImageDimens.leftMargin = currentImageLeft;
         currentImageDimens.topMargin = currentImageTop;
         currentImageDimens.rightMargin = currentImageRight;
@@ -68,11 +64,11 @@ public class ImagePosition extends AppCompatActivity
 
         if(0 == rotation || 2 == rotation)
         {
-            NextImagePositionlandscdapeOrPortrait(width, height);
+            NextImagePositionrPortrait();
         }
         else if(1 == rotation || 3 == rotation)
         {
-            NextImagePositionlandscdapeOrPortrait(height, width);
+            NextImagePositionlandscdape();
         }
 
         nextImageDimens.leftMargin = nextImageLeft;
@@ -89,11 +85,11 @@ public class ImagePosition extends AppCompatActivity
 
         if(0 == rotation || 2 == rotation)
         {
-            PrevImagePositionlandscdapeOrPortrait(width, height);
+            PrevImagePositionPortrait();
         }
         else if(1 == rotation || 3 == rotation)
         {
-            PrevImagePositionlandscdapeOrPortrait(height, width);
+            PrevImagePositionlandscdape();
         }
 
         prevImageDimens.topMargin = prevImageTop;
@@ -103,32 +99,46 @@ public class ImagePosition extends AppCompatActivity
         prevImageView.setLayoutParams(prevImageDimens);
     }
 
-    private void PortraitCurrentImagePosition()
+    private void currentImagePositionPortrait()
     {
         currentImageLeft = width / 5;
         currentImageTop = 3 * height / 7;
         currentImageRight = width / 5;
     }
 
-    public void landscdapeCurrentImagePosition()
+    public void currentImagePositionLandscdape()
     {
         currentImageLeft = width / 3;
-        currentImageTop = height / 5;
+        currentImageTop = height / 4;
         currentImageRight = width / 3;
     }
 
-    private void NextImagePositionlandscdapeOrPortrait(int width, int height)
+    private void NextImagePositionrPortrait()
     {
-        nextImageLeft = 5 * width / 8;
+        nextImageLeft = width / 2 + width / 7;
         nextImageTop = height / 5;
-        nextImageBottom = 15 * height / 34;
+        nextImageBottom = height / 2 - height / 15;
 
     }
 
-    private void PrevImagePositionlandscdapeOrPortrait(int width, int height)
+    private void NextImagePositionlandscdape()
+    {
+        nextImageLeft = width / 2 + width / 4 ;
+        nextImageTop = height / 13;
+        nextImageBottom = height / 2;
+    }
+
+    private void PrevImagePositionPortrait()
     {
         prevImageTop = height / 5;
-        prevImageRight = 5 * width / 8;
-        prevImageBottom = 15 * height / 34;
+        prevImageRight = width / 2 + width / 7;
+        prevImageBottom = height / 2 - height / 15;
+    }
+
+    private void PrevImagePositionlandscdape()
+    {
+        prevImageTop = height / 13;
+        prevImageRight = width / 2 + width / 4 ;
+        prevImageBottom = height / 2;
     }
 }
