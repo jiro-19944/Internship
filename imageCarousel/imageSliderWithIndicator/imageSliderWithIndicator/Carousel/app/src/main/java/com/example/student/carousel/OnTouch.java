@@ -1,5 +1,6 @@
 package com.example.student.carousel;
 
+import android.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,8 +17,8 @@ public class OnTouch extends AppCompatActivity
     private float fromPosition;
     private float toPosition;
     private int index;
-    private int nextIndex;
-    private int prevIndex;
+//    private int nextIndex;
+//    private int prevIndex;
     private int[] images;
     private int[] activeImages;
     private ImageView currentImageView;
@@ -29,28 +30,29 @@ public class OnTouch extends AppCompatActivity
     private RadioButton radio3;
     private RadioButton radio4;
     private RadioButton radio5;
+    private StaticActiveImages dataFragment;
 
     OnTouch(ImageView currentImageView, RelativeLayout relativeLayout, ImageView nextImageView, ImageView prevImageView, RadioGroup radioGroup, RadioButton r1,
-            RadioButton r2, RadioButton r3, RadioButton r4, RadioButton r5)
+            RadioButton r2, RadioButton r3, RadioButton r4, RadioButton r5, int[] activeImages)
     {
         this.relativeLayout = relativeLayout;
         this.index = 0;
-        this.nextIndex = index + 1;
-        this.prevIndex = index - 1;
+//        this.nextIndex = index + 1;
+//        this.prevIndex = index - 1;
         this.images = new int[]{R.drawable.img1,
-                                R.drawable.img2,
-                                R.drawable.img3,
-                                R.drawable.img4,
-                                R.drawable.img5,
-                                R.drawable.img6,
-                                R.drawable.img7,
-                                R.drawable.img8,
-                                R.drawable.img9,
-                                R.drawable.img10,
-                                R.drawable.bob1,
-                                R.drawable.bob2,
-                                R.drawable.bob3};
-        this.activeImages = new int[]{images[0], images[1], images[2]};
+                R.drawable.img2,
+                R.drawable.img3,
+                R.drawable.img4,
+                R.drawable.img5,
+                R.drawable.img6,
+                R.drawable.img7,
+                R.drawable.img8,
+                R.drawable.img9,
+                R.drawable.img10,
+                R.drawable.bob1,
+                R.drawable.bob2,
+                R.drawable.bob3};
+        this.activeImages = activeImages;
         this.currentImageView = currentImageView;
         this.nextImageView = nextImageView;
         this.prevImageView = prevImageView;
@@ -60,7 +62,20 @@ public class OnTouch extends AppCompatActivity
         this.radio3 = r3;
         this.radio4 = r4;
         this.radio5 = r5;
-    };
+
+        FragmentManager fm = getFragmentManager();
+        dataFragment = (StaticActiveImages) fm.findFragmentByTag("data");
+
+        // create the fragment and data the first time
+        if (dataFragment == null)
+        {
+            // add the fragment
+            dataFragment = new StaticActiveImages();
+//            fm.beginTransaction().add(dataFragment, "data").commit();
+            // load the data from the web
+//            dataFragment.setData(getActiveImages());
+        }
+    }
 
     public void getOnTouch()
     {
@@ -82,9 +97,11 @@ public class OnTouch extends AppCompatActivity
                             {
                                 ++index;
                                 verifyIndex();
-                                nextIndexFromIndex(index);
-                                prevIndexFromIndex(index);
-                                updateActiveImages();
+                                activeImagesToLeft();
+                                dataFragment.setData(getActiveImages());
+//                                nextIndexFromIndex(index);
+//                                prevIndexFromIndex(index);
+//                                updateActiveImages();
                                 showImages();
                                 radioButtonFromImage("next");
                             }
@@ -92,9 +109,11 @@ public class OnTouch extends AppCompatActivity
                             {
                                 --index;
                                 verifyIndex();
-                                nextIndexFromIndex(index);
-                                prevIndexFromIndex(index);
-                                updateActiveImages();
+                                activeImagesToRight();
+                                dataFragment.setData(getActiveImages());
+//                                nextIndexFromIndex(index);
+//                                prevIndexFromIndex(index);
+//                                updateActiveImages();
                                 showImages();
                                 radioButtonFromImage("prev");
                             }
@@ -105,6 +124,34 @@ public class OnTouch extends AppCompatActivity
                     return true;
                 }
             });
+        }
+    }
+
+    private void activeImagesToLeft()
+    {
+        int tmp = activeImages[0];
+        for (int i = 0; i < getLenghtImages(); ++i)
+        {
+            activeImages[i] = activeImages[i + 1];
+            if(i + 1 == getLenghtImages() - 1)
+            {
+                activeImages[i + 1] = tmp;
+                break;
+            }
+        }
+    }
+
+    private void activeImagesToRight()
+    {
+        int tmp = activeImages[getLenghtImages() - 1];
+        for (int i = getLenghtImages() - 1; i >= 0; --i)
+        {
+            activeImages[i] = activeImages[i - 1];
+            if(i - 1 == 0)
+            {
+                activeImages[i - 1] = tmp;
+                break;
+            }
         }
     }
 
@@ -120,36 +167,36 @@ public class OnTouch extends AppCompatActivity
         }
     }
 
-    private void nextIndexFromIndex(int index)
-    {
-        nextIndex = index + 1;
-        if(nextIndex > (getLenghtImages() - 1))
-        {
-            nextIndex = 0;
-        }
-    }
-
-    private void prevIndexFromIndex(int index)
-    {
-        prevIndex = index - 1;
-        if(prevIndex < 0)
-        {
-            prevIndex = (getLenghtImages() - 1);
-        }
-    }
-
-    private void updateActiveImages()
-    {
-        activeImages[2] = images[nextIndex];
-        activeImages[0] = images[prevIndex];
-        activeImages[1] = images[index];
-    }
+//    private void nextIndexFromIndex(int index)
+//    {
+//        nextIndex = index + 1;
+//        if(nextIndex > (getLenghtImages() - 1))
+//        {
+//            nextIndex = 0;
+//        }
+//    }
+//
+//    private void prevIndexFromIndex(int index)
+//    {
+//        prevIndex = index - 1;
+//        if(prevIndex < 0)
+//        {
+//            prevIndex = (getLenghtImages() - 1);
+//        }
+//    }
+//
+//    private void updateActiveImages()
+//    {
+//        activeImages[2] = images[nextIndex];
+//        activeImages[0] = images[prevIndex];
+//        activeImages[1] = images[index];
+//    }
 
     private void showImages()
     {
-        currentImageView.setImageResource(activeImages[1]);
-        nextImageView.setImageResource(activeImages[2]);
-        prevImageView.setImageResource(activeImages[0]);
+        currentImageView.setImageResource(activeImages[0]);
+        nextImageView.setImageResource(activeImages[1]);
+        prevImageView.setImageResource(activeImages[getLenghtImages() - 1]);
 
     }
 
@@ -242,5 +289,10 @@ public class OnTouch extends AppCompatActivity
     public int getLenghtImages()
     {
         return this.images.length;
+    }
+
+    public int[] getActiveImages()
+    {
+        return this.activeImages;
     }
 }
