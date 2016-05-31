@@ -1,6 +1,5 @@
 package com.example.student.carousel;
 
-import android.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -8,8 +7,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
-
+import java.util.ArrayList;
 
 public class OnTouch extends AppCompatActivity
 {
@@ -17,10 +15,8 @@ public class OnTouch extends AppCompatActivity
     private float fromPosition;
     private float toPosition;
     private int index;
-//    private int nextIndex;
-//    private int prevIndex;
     private int[] images;
-    private int[] activeImages;
+    private ArrayList activeImages;
     private ImageView currentImageView;
     private ImageView prevImageView;
     private ImageView nextImageView;
@@ -30,15 +26,12 @@ public class OnTouch extends AppCompatActivity
     private RadioButton radio3;
     private RadioButton radio4;
     private RadioButton radio5;
-    private StaticActiveImages dataFragment;
 
     OnTouch(ImageView currentImageView, RelativeLayout relativeLayout, ImageView nextImageView, ImageView prevImageView, RadioGroup radioGroup, RadioButton r1,
-            RadioButton r2, RadioButton r3, RadioButton r4, RadioButton r5, int[] activeImages)
+            RadioButton r2, RadioButton r3, RadioButton r4, RadioButton r5, ArrayList activeImages )
     {
         this.relativeLayout = relativeLayout;
         this.index = 0;
-//        this.nextIndex = index + 1;
-//        this.prevIndex = index - 1;
         this.images = new int[]{R.drawable.img1,
                 R.drawable.img2,
                 R.drawable.img3,
@@ -62,23 +55,11 @@ public class OnTouch extends AppCompatActivity
         this.radio3 = r3;
         this.radio4 = r4;
         this.radio5 = r5;
-
-        FragmentManager fm = getFragmentManager();
-        dataFragment = (StaticActiveImages) fm.findFragmentByTag("data");
-
-        // create the fragment and data the first time
-        if (dataFragment == null)
-        {
-            // add the fragment
-            dataFragment = new StaticActiveImages();
-//            fm.beginTransaction().add(dataFragment, "data").commit();
-            // load the data from the web
-//            dataFragment.setData(getActiveImages());
-        }
     }
 
     public void getOnTouch()
     {
+        showImages();
         if (relativeLayout != null)
         {
             relativeLayout.setOnTouchListener(new RelativeLayout.OnTouchListener()
@@ -98,10 +79,6 @@ public class OnTouch extends AppCompatActivity
                                 ++index;
                                 verifyIndex();
                                 activeImagesToLeft();
-                                dataFragment.setData(getActiveImages());
-//                                nextIndexFromIndex(index);
-//                                prevIndexFromIndex(index);
-//                                updateActiveImages();
                                 showImages();
                                 radioButtonFromImage("next");
                             }
@@ -110,10 +87,6 @@ public class OnTouch extends AppCompatActivity
                                 --index;
                                 verifyIndex();
                                 activeImagesToRight();
-                                dataFragment.setData(getActiveImages());
-//                                nextIndexFromIndex(index);
-//                                prevIndexFromIndex(index);
-//                                updateActiveImages();
                                 showImages();
                                 radioButtonFromImage("prev");
                             }
@@ -129,13 +102,13 @@ public class OnTouch extends AppCompatActivity
 
     private void activeImagesToLeft()
     {
-        int tmp = activeImages[0];
+        int tmp = (int) activeImages.get(0);
         for (int i = 0; i < getLenghtImages(); ++i)
         {
-            activeImages[i] = activeImages[i + 1];
+            activeImages.set(i , activeImages.get(i + 1));
             if(i + 1 == getLenghtImages() - 1)
             {
-                activeImages[i + 1] = tmp;
+                activeImages.set(i + 1, tmp);
                 break;
             }
         }
@@ -143,13 +116,13 @@ public class OnTouch extends AppCompatActivity
 
     private void activeImagesToRight()
     {
-        int tmp = activeImages[getLenghtImages() - 1];
+        int tmp = (int)activeImages.get((int)(activeImages.size()-1));
         for (int i = getLenghtImages() - 1; i >= 0; --i)
         {
-            activeImages[i] = activeImages[i - 1];
+            activeImages.set(i, activeImages.get(i-1));
             if(i - 1 == 0)
             {
-                activeImages[i - 1] = tmp;
+                activeImages.set(i-1, tmp);
                 break;
             }
         }
@@ -167,36 +140,11 @@ public class OnTouch extends AppCompatActivity
         }
     }
 
-//    private void nextIndexFromIndex(int index)
-//    {
-//        nextIndex = index + 1;
-//        if(nextIndex > (getLenghtImages() - 1))
-//        {
-//            nextIndex = 0;
-//        }
-//    }
-//
-//    private void prevIndexFromIndex(int index)
-//    {
-//        prevIndex = index - 1;
-//        if(prevIndex < 0)
-//        {
-//            prevIndex = (getLenghtImages() - 1);
-//        }
-//    }
-//
-//    private void updateActiveImages()
-//    {
-//        activeImages[2] = images[nextIndex];
-//        activeImages[0] = images[prevIndex];
-//        activeImages[1] = images[index];
-//    }
-
     private void showImages()
     {
-        currentImageView.setImageResource(activeImages[0]);
-        nextImageView.setImageResource(activeImages[1]);
-        prevImageView.setImageResource(activeImages[getLenghtImages() - 1]);
+        currentImageView.setImageResource((int)activeImages.get(0));
+        nextImageView.setImageResource((int)activeImages.get(1));
+        prevImageView.setImageResource((int)(activeImages.get((int) activeImages.size() - 1)));
 
     }
 
@@ -291,8 +239,13 @@ public class OnTouch extends AppCompatActivity
         return this.images.length;
     }
 
-    public int[] getActiveImages()
+    public ArrayList getActiveImages()
     {
         return this.activeImages;
+    }
+
+    public void setActiveImages(ArrayList activeImages)
+    {
+        this.activeImages = activeImages;
     }
 }

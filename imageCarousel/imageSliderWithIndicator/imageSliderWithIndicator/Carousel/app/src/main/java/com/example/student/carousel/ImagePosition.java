@@ -115,15 +115,15 @@ public class ImagePosition extends AppCompatActivity
 
     private void NextImagePositionrPortrait()
     {
-        nextImageLeft = width / 2 + width / 7;
+        nextImageLeft = 9 * width / 14;
         nextImageTop = height / 5;
-        nextImageBottom = height / 2 - height / 15;
+        nextImageBottom = 13 * height / 30;
 
     }
 
     private void NextImagePositionlandscdape()
     {
-        nextImageLeft = width / 2 + width / 4 ;
+        nextImageLeft = 3 * width / 4 ;
         nextImageTop = height / 13;
         nextImageBottom = height / 2;
     }
@@ -131,14 +131,14 @@ public class ImagePosition extends AppCompatActivity
     private void PrevImagePositionPortrait()
     {
         prevImageTop = height / 5;
-        prevImageRight = width / 2 + width / 7;
-        prevImageBottom = height / 2 - height / 15;
+        prevImageRight = 9 * width / 14;
+        prevImageBottom = 13 * height / 30;
     }
 
     private void PrevImagePositionlandscdape()
     {
         prevImageTop = height / 13;
-        prevImageRight = width / 2 + width / 4 ;
+        prevImageRight = 3 * width / 4 ;
         prevImageBottom = height / 2;
     }
 }

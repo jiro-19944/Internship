@@ -1,46 +1,21 @@
 package com.example.student.carousel;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Context;
-import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
-import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Display;
-import android.view.Surface;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
-
-import java.lang.reflect.Field;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
 {
-    private int[] activeImages = {R.drawable.img1,
-                                R.drawable.img2,
-                                R.drawable.img3,
-                                R.drawable.img4,
-                                R.drawable.img5,
-                                R.drawable.img6,
-                                R.drawable.img7,
-                                R.drawable.img8,
-                                R.drawable.img9,
-                                R.drawable.img10,
-                                R.drawable.bob1,
-                                R.drawable.bob2,
-                                R.drawable.bob3};;
-
-   private StaticActiveImages dataFragment;
-
-
+    private ArrayList activeImages = new ArrayList<>();
+    private OnTouch onTouch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -48,20 +23,9 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // find the retained fragment on activity restarts
+//----------------- set activeImages from XML ---------------------
 
-        FragmentManager fm = getFragmentManager();
-        dataFragment = (StaticActiveImages) fm.findFragmentByTag("data");
-
-        // create the fragment and data the first time
-        if (dataFragment == null)
-        {
-            // add the fragment
-            dataFragment = new StaticActiveImages();
-            fm.beginTransaction().add(dataFragment, "data").commit();
-            // load the data from the web
-            dataFragment.setData(getActiveImages());
-        }
+        getImagesFromResources();
 
 //----------------- get images from XML by id ---------------------
 
@@ -70,19 +34,16 @@ public class MainActivity extends AppCompatActivity
         ImageView nextImageView = (ImageView) findViewById(R.id.next_image_view);
         ImageView prevImageView = (ImageView) findViewById(R.id.prev_image_view);
 
-
+//----------------- get Display metrics -----------------------
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
-
         int width = metrics.widthPixels;
         int height = metrics.heightPixels;
 
-        System.out.println("----------------  width  -----------" + width);
-        System.out.println("----------------  height  -----------" + height);
+//----------------- get Display rotation -----------------------
 
         Display display = ((WindowManager) this.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         int rotation = display.getRotation();
-
 
 //------------------ set images positions --------------------------------
 
@@ -100,38 +61,50 @@ public class MainActivity extends AppCompatActivity
         RadioButton radio4 = (RadioButton) findViewById(R.id.radio4);
         RadioButton radio5 = (RadioButton) findViewById(R.id.radio5);
 
+//---------------------- swapping images  -----------------------------------
 
-
-//---------------------- create OnTouch object -----------------------------------
-
-        OnTouch onTouch = new OnTouch(currentImageView, relativeLayout, nextImageView, prevImageView,
-                radioGroup, radio1, radio2, radio3, radio4, radio5/*, StaticActiveImages.activeImages*/, dataFragment.getData());
+        onTouch = new OnTouch(currentImageView, relativeLayout, nextImageView, prevImageView,
+                radioGroup, radio1, radio2, radio3, radio4, radio5, getActiveImages());
         onTouch.getOnTouch();
-        //setActiveImages(onTouch.getActiveImages());
         //onTouch.imageFromRadioButton();
     }
 
     @Override
-    public void onDestroy()
+    protected void onSaveInstanceState(Bundle outState)
     {
-        super.onDestroy();
-        // store the data in the fragment
-        dataFragment.setData(getActiveImages());
+        super.onSaveInstanceState(outState);
+        setActiveImagesMain(onTouch.getActiveImages());
+        outState.putIntegerArrayList("ACTIVE_IMAGES", activeImages);
     }
 
-    private int[] getActiveImages()
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState)
+    {
+        super.onRestoreInstanceState(savedInstanceState);
+        activeImages = savedInstanceState.getIntegerArrayList("ACTIVE_IMAGES");
+        onTouch.setActiveImages(activeImages);
+        onTouch.getOnTouch();
+    }
+
+    private ArrayList getActiveImages()
     {
         return this.activeImages;
     }
 
-    public void setActiveImages(int[] images)
+    public void setActiveImagesMain(ArrayList images)
     {
-        System.out.println("--------------------  arjeqavorum -------------------");
-        System.out.println("--------------------  ekaci andamner -------------------" + images[0]);
-
-
         this.activeImages = images;
-        System.out.println("--------------------  tvaci andamner -------------------" + activeImages[0]);
+    }
+
+    private void getImagesFromResources()
+    {
+        String[] array = getResources().getStringArray(R.array.images);
+        for(String a : array)
+        {
+           int imageId = getResources().getIdentifier(a, "drawable" , getPackageName());
+            activeImages.add(imageId);
+        }
 
     }
 }
