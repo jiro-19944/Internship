@@ -49,7 +49,7 @@ public class ImagePosition extends AppCompatActivity
         }
         else if(1 == rotation || 3 == rotation)
         {
-            currentImagePositionLandscdape();
+            currentImagePositionLandscape();
         }
         currentImageDimens.leftMargin = currentImageLeft;
         currentImageDimens.topMargin = currentImageTop;
@@ -65,10 +65,12 @@ public class ImagePosition extends AppCompatActivity
         if(0 == rotation || 2 == rotation)
         {
             NextImagePositionrPortrait();
+            System.out.println("----------- rotation = " + rotation);
         }
         else if(1 == rotation || 3 == rotation)
         {
-            NextImagePositionlandscdape();
+            NextImagePositionLandscape();
+            System.out.println("----------- rotation = " + rotation);
         }
 
         nextImageDimens.leftMargin = nextImageLeft;
@@ -89,7 +91,7 @@ public class ImagePosition extends AppCompatActivity
         }
         else if(1 == rotation || 3 == rotation)
         {
-            PrevImagePositionlandscdape();
+            PrevImagePositionLandscape();
         }
 
         prevImageDimens.topMargin = prevImageTop;
@@ -106,7 +108,7 @@ public class ImagePosition extends AppCompatActivity
         currentImageRight = width / 5;
     }
 
-    public void currentImagePositionLandscdape()
+    public void currentImagePositionLandscape()
     {
         currentImageLeft = width / 3;
         currentImageTop = height / 4;
@@ -121,7 +123,7 @@ public class ImagePosition extends AppCompatActivity
 
     }
 
-    private void NextImagePositionlandscdape()
+    private void NextImagePositionLandscape()
     {
         nextImageLeft = 3 * width / 4 ;
         nextImageTop = height / 13;
@@ -135,7 +137,7 @@ public class ImagePosition extends AppCompatActivity
         prevImageBottom = 13 * height / 30;
     }
 
-    private void PrevImagePositionlandscdape()
+    private void PrevImagePositionLandscape()
     {
         prevImageTop = height / 13;
         prevImageRight = 3 * width / 4 ;

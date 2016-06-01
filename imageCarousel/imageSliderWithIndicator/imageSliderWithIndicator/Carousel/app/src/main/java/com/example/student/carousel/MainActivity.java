@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity
 {
     private ArrayList activeImages = new ArrayList<>();
+    private int activeIndex;
     private OnTouch onTouch;
 
     @Override
@@ -63,8 +64,8 @@ public class MainActivity extends AppCompatActivity
 
 //---------------------- swapping images  -----------------------------------
 
-        onTouch = new OnTouch(currentImageView, relativeLayout, nextImageView, prevImageView,
-                radioGroup, radio1, radio2, radio3, radio4, radio5, getActiveImages());
+        onTouch = new OnTouch(relativeLayout, currentImageView, nextImageView, prevImageView,
+                radioGroup, radio1, radio2, radio3, radio4, radio5, getActiveImages(), getActiveIndex());
         onTouch.getOnTouch();
         //onTouch.imageFromRadioButton();
     }
@@ -75,6 +76,9 @@ public class MainActivity extends AppCompatActivity
         super.onSaveInstanceState(outState);
         setActiveImagesMain(onTouch.getActiveImages());
         outState.putIntegerArrayList("ACTIVE_IMAGES", activeImages);
+
+        setActiveIndexMain(onTouch.getActiveIndex());
+        outState.putInt("ACTIVE_INDEX", activeIndex);
     }
 
 
@@ -84,17 +88,11 @@ public class MainActivity extends AppCompatActivity
         super.onRestoreInstanceState(savedInstanceState);
         activeImages = savedInstanceState.getIntegerArrayList("ACTIVE_IMAGES");
         onTouch.setActiveImages(activeImages);
+
+        activeIndex = savedInstanceState.getInt("ACTIVE_INDEX");
+        onTouch.setActiveIndex(activeIndex);
+
         onTouch.getOnTouch();
-    }
-
-    private ArrayList getActiveImages()
-    {
-        return this.activeImages;
-    }
-
-    public void setActiveImagesMain(ArrayList images)
-    {
-        this.activeImages = images;
     }
 
     private void getImagesFromResources()
@@ -102,12 +100,28 @@ public class MainActivity extends AppCompatActivity
         String[] array = getResources().getStringArray(R.array.images);
         for(String a : array)
         {
-           int imageId = getResources().getIdentifier(a, "drawable" , getPackageName());
+            int imageId = getResources().getIdentifier(a, "drawable" , getPackageName());
             activeImages.add(imageId);
         }
 
     }
+
+    public void setActiveImagesMain(ArrayList images)
+    {
+        this.activeImages = images;
+    }
+
+    public void setActiveIndexMain(int index) {
+        this.activeIndex = index;
+    }
+
+    private ArrayList getActiveImages()
+    {
+        return this.activeImages;
+    }
+
+    private int getActiveIndex()
+    {
+        return this.activeIndex;
+    }
 }
-
-
-

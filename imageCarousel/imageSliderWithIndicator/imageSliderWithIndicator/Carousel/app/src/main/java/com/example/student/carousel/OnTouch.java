@@ -12,11 +12,6 @@ import java.util.ArrayList;
 public class OnTouch extends AppCompatActivity
 {
     private RelativeLayout relativeLayout;
-    private float fromPosition;
-    private float toPosition;
-    private int index;
-    private int[] images;
-    private ArrayList activeImages;
     private ImageView currentImageView;
     private ImageView prevImageView;
     private ImageView nextImageView;
@@ -26,12 +21,26 @@ public class OnTouch extends AppCompatActivity
     private RadioButton radio3;
     private RadioButton radio4;
     private RadioButton radio5;
+    private float fromPosition;
+    private float toPosition;
+    private ArrayList activeImages;
+    private int[] images;
+    private int activeIndex;
 
-    OnTouch(ImageView currentImageView, RelativeLayout relativeLayout, ImageView nextImageView, ImageView prevImageView, RadioGroup radioGroup, RadioButton r1,
-            RadioButton r2, RadioButton r3, RadioButton r4, RadioButton r5, ArrayList activeImages )
+    OnTouch(RelativeLayout relativeLayout, ImageView currentImageView, ImageView nextImageView, ImageView prevImageView, RadioGroup radioGroup, RadioButton r1,
+            RadioButton r2, RadioButton r3, RadioButton r4, RadioButton r5, ArrayList activeImages , int activeIndex)
     {
         this.relativeLayout = relativeLayout;
-        this.index = 0;
+        this.currentImageView = currentImageView;
+        this.nextImageView = nextImageView;
+        this.prevImageView = prevImageView;
+        this.radioGroup = radioGroup;
+        this.radio1 = r1;
+        this.radio2 = r2;
+        this.radio3 = r3;
+        this.radio4 = r4;
+        this.radio5 = r5;
+        this.activeImages = activeImages;
         this.images = new int[]{R.drawable.img1,
                 R.drawable.img2,
                 R.drawable.img3,
@@ -45,16 +54,7 @@ public class OnTouch extends AppCompatActivity
                 R.drawable.bob1,
                 R.drawable.bob2,
                 R.drawable.bob3};
-        this.activeImages = activeImages;
-        this.currentImageView = currentImageView;
-        this.nextImageView = nextImageView;
-        this.prevImageView = prevImageView;
-        this.radioGroup = radioGroup;
-        this.radio1 = r1;
-        this.radio2 = r2;
-        this.radio3 = r3;
-        this.radio4 = r4;
-        this.radio5 = r5;
+        this.activeIndex = activeIndex;
     }
 
     public void getOnTouch()
@@ -76,19 +76,21 @@ public class OnTouch extends AppCompatActivity
                             toPosition = event.getX();
                             if (fromPosition > toPosition)
                             {
-                                ++index;
+                                ++activeIndex;
                                 verifyIndex();
                                 activeImagesToLeft();
                                 showImages();
                                 radioButtonFromImage("next");
+                                System.out.println("----------- activeIndex =     " + activeIndex);
                             }
                             else if (fromPosition < toPosition)
                             {
-                                --index;
+                                --activeIndex;
                                 verifyIndex();
                                 activeImagesToRight();
                                 showImages();
                                 radioButtonFromImage("prev");
+                                System.out.println("----------- activeIndex =     " + activeIndex);
                             }
                             break;
                         default:
@@ -130,13 +132,13 @@ public class OnTouch extends AppCompatActivity
 
     private void verifyIndex()
     {
-        if (index > (getLenghtImages() - 1))
+        if (activeIndex > (getLenghtImages() - 1))
         {
-            index = 0;
+            activeIndex = 0;
         }
-        else if (index < 0)
+        else if (activeIndex < 0)
         {
-            index = (getLenghtImages() - 1);
+            activeIndex = (getLenghtImages() - 1);
         }
     }
 
@@ -189,11 +191,11 @@ public class OnTouch extends AppCompatActivity
 
     private void firstLastRadioButton()
     {
-        if(0 == index)
+        if(0 == activeIndex)
         {
             radio1.setChecked(true);
         }
-        else if(getLenghtImages() - 1 == index)
+        else if(getLenghtImages() - 1 == activeIndex)
         {
             radio5.setChecked(true);
         }
@@ -239,13 +241,23 @@ public class OnTouch extends AppCompatActivity
         return this.images.length;
     }
 
+    public void setActiveImages(ArrayList activeImages)
+    {
+        this.activeImages = activeImages;
+    }
+
+    public void setActiveIndex(int activeIndex)
+    {
+        this.activeIndex = activeIndex;
+    }
+
     public ArrayList getActiveImages()
     {
         return this.activeImages;
     }
 
-    public void setActiveImages(ArrayList activeImages)
+    public int getActiveIndex()
     {
-        this.activeImages = activeImages;
+        return this.activeIndex;
     }
 }

@@ -48,6 +48,7 @@
         android:layout_marginBottom="28dp"
         android:scaleType="fitXY"
         android:src="@drawable/img1"
+        android:layout_centerHorizontal="true"
         app:sriv_left_top_corner_radius="30dp"
         app:sriv_right_top_corner_radius="30dp"
         app:sriv_left_bottom_corner_radius="30dp"
