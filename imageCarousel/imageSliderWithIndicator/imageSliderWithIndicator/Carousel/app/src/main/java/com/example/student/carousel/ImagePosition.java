@@ -60,6 +60,8 @@ public class ImagePosition extends AppCompatActivity
 
     public void setNextImagePosition(ImageView nextImageView, int rotation)
     {
+        nextImageView.setMaxWidth(width / 3);
+        nextImageView.setMaxHeight(height / 5);
         ViewGroup.MarginLayoutParams nextImageDimens = (ViewGroup.MarginLayoutParams) nextImageView.getLayoutParams();
 
         if(0 == rotation || 2 == rotation)
@@ -83,6 +85,8 @@ public class ImagePosition extends AppCompatActivity
 
     public void setPrevImagePosition(ImageView prevImageView, int rotation)
     {
+        prevImageView.setMaxWidth(width / 3);
+        prevImageView.setMaxHeight(height / 5);
         ViewGroup.MarginLayoutParams prevImageDimens = (ViewGroup.MarginLayoutParams) prevImageView.getLayoutParams();
 
         if(0 == rotation || 2 == rotation)
@@ -93,6 +97,9 @@ public class ImagePosition extends AppCompatActivity
         {
             PrevImagePositionLandscape();
         }
+
+//        prevImageView.setMinimumWidth(width / 15);
+//        prevImageView.setMinimumHeight(height / 10);
 
         prevImageDimens.topMargin = prevImageTop;
         prevImageDimens.rightMargin = prevImageRight;
