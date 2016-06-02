@@ -81,7 +81,7 @@ public class OnTouch extends AppCompatActivity
                                 activeImagesToLeft();
                                 showImages();
                                 radioButtonFromImage("next");
-                                System.out.println("----------- activeIndex =     " + activeIndex);
+//                                System.out.println("----------- activeIndex =     " + activeIndex);
                             }
                             else if (fromPosition < toPosition)
                             {
@@ -90,7 +90,7 @@ public class OnTouch extends AppCompatActivity
                                 activeImagesToRight();
                                 showImages();
                                 radioButtonFromImage("prev");
-                                System.out.println("----------- activeIndex =     " + activeIndex);
+//                                System.out.println("----------- activeIndex =     " + activeIndex);
                             }
                             break;
                         default:

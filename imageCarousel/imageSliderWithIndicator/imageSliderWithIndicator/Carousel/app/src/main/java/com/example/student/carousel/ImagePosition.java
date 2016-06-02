@@ -67,12 +67,12 @@ public class ImagePosition extends AppCompatActivity
         if(0 == rotation || 2 == rotation)
         {
             NextImagePositionrPortrait();
-            System.out.println("----------- rotation = " + rotation);
+//            System.out.println("----------- rotation = " + rotation);
         }
         else if(1 == rotation || 3 == rotation)
         {
             NextImagePositionLandscape();
-            System.out.println("----------- rotation = " + rotation);
+//            System.out.println("----------- rotation = " + rotation);
         }
 
         nextImageDimens.leftMargin = nextImageLeft;
