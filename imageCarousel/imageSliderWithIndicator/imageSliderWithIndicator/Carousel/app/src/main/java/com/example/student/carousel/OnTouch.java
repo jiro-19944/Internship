@@ -23,12 +23,13 @@ public class OnTouch extends AppCompatActivity
     private RadioButton radio5;
     private float fromPosition;
     private float toPosition;
-    private ArrayList activeImages;
-    private int[] images;
-    private int activeIndex;
+    private ArrayList images;
+    private int index;
+    private int nextIndex;
+    private int prevIndex;
 
     OnTouch(RelativeLayout relativeLayout, ImageView currentImageView, ImageView nextImageView, ImageView prevImageView, RadioGroup radioGroup, RadioButton r1,
-            RadioButton r2, RadioButton r3, RadioButton r4, RadioButton r5, ArrayList activeImages , int activeIndex)
+            RadioButton r2, RadioButton r3, RadioButton r4, RadioButton r5, ArrayList images , int index)
     {
         this.relativeLayout = relativeLayout;
         this.currentImageView = currentImageView;
@@ -40,25 +41,15 @@ public class OnTouch extends AppCompatActivity
         this.radio3 = r3;
         this.radio4 = r4;
         this.radio5 = r5;
-        this.activeImages = activeImages;
-        this.images = new int[]{R.drawable.img1,
-                R.drawable.img2,
-                R.drawable.img3,
-                R.drawable.img4,
-                R.drawable.img5,
-                R.drawable.img6,
-                R.drawable.img7,
-                R.drawable.img8,
-                R.drawable.img9,
-                R.drawable.img10,
-                R.drawable.bob1,
-                R.drawable.bob2,
-                R.drawable.bob3};
-        this.activeIndex = activeIndex;
+        this.images = images;
+        this.index = index;
+        this.nextIndex = index + 1;
+        this.prevIndex = index - 1;
     }
 
     public void getOnTouch()
     {
+        verifyIndexes();
         showImages();
         if (relativeLayout != null)
         {
@@ -76,21 +67,17 @@ public class OnTouch extends AppCompatActivity
                             toPosition = event.getX();
                             if (fromPosition > toPosition)
                             {
-                                ++activeIndex;
-                                verifyIndex();
-                                activeImagesToLeft();
+                                ++index;
+                                verifyIndexes();
                                 showImages();
                                 radioButtonFromImage("next");
-//                                System.out.println("----------- activeIndex =     " + activeIndex);
                             }
                             else if (fromPosition < toPosition)
                             {
-                                --activeIndex;
-                                verifyIndex();
-                                activeImagesToRight();
+                                --index;
+                                verifyIndexes();
                                 showImages();
                                 radioButtonFromImage("prev");
-//                                System.out.println("----------- activeIndex =     " + activeIndex);
                             }
                             break;
                         default:
@@ -102,51 +89,32 @@ public class OnTouch extends AppCompatActivity
         }
     }
 
-    private void activeImagesToLeft()
+    private void verifyIndexes()
     {
-        int tmp = (int) activeImages.get(0);
-        for (int i = 0; i < getLenghtImages(); ++i)
-        {
-            activeImages.set(i , activeImages.get(i + 1));
-            if(i + 1 == getLenghtImages() - 1)
-            {
-                activeImages.set(i + 1, tmp);
-                break;
-            }
-        }
+        index = testIndex(index);
+        nextIndex = testIndex(index + 1);
+        prevIndex = testIndex(index - 1);
     }
 
-    private void activeImagesToRight()
+    private int testIndex(int index)
     {
-        int tmp = (int)activeImages.get((int)(activeImages.size()-1));
-        for (int i = getLenghtImages() - 1; i >= 0; --i)
+        if (index > (getLenghtImages() - 1))
         {
-            activeImages.set(i, activeImages.get(i-1));
-            if(i - 1 == 0)
-            {
-                activeImages.set(i-1, tmp);
-                break;
-            }
+            index = 0;
         }
-    }
-
-    private void verifyIndex()
-    {
-        if (activeIndex > (getLenghtImages() - 1))
+        else if (index < 0)
         {
-            activeIndex = 0;
+            index = (getLenghtImages() - 1);
         }
-        else if (activeIndex < 0)
-        {
-            activeIndex = (getLenghtImages() - 1);
-        }
+        return index;
     }
 
     private void showImages()
     {
-        currentImageView.setImageResource((int)activeImages.get(0));
-        nextImageView.setImageResource((int)activeImages.get(1));
-        prevImageView.setImageResource((int)(activeImages.get((int) activeImages.size() - 1)));
+        
+        currentImageView.setImageResource((int)images.get(index));
+        nextImageView.setImageResource((int)images.get(nextIndex));
+        prevImageView.setImageResource((int)(images.get(prevIndex)));
 
     }
 
@@ -191,73 +159,38 @@ public class OnTouch extends AppCompatActivity
 
     private void firstLastRadioButton()
     {
-        if(0 == activeIndex)
+        if(0 == index)
         {
             radio1.setChecked(true);
         }
-        else if(getLenghtImages() - 1 == activeIndex)
+        else if(getLenghtImages() - 1 == index)
         {
             radio5.setChecked(true);
         }
     }
 
-//    public void imageFromRadioButton()
-//    {
-//        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-//        {
-//            @Override
-//            public void onCheckedChanged(RadioGroup group, int checkedId)
-//            {
-//                View radioButton = radioGroup.findViewById(checkedId);
-//                int i = radioGroup.indexOfChild(radioButton);
-//                if(0 == i)
-//                {
-//                    index = prevIndex;
-//                    verifyIndex();
-//                    nextIndexFromIndex(prevIndex);
-//                    prevIndexFromIndex(prevIndex);
-//                    updateActiveImages();
-//                    showImages();
-//                }
-//                else if(1 == i)
-//                {
-//                    showImages();;
-//                }
-//                else if(2 == i)
-//                {
-//                    index = nextIndex;
-//                    verifyIndex();
-//                    prevIndexFromIndex(nextIndex);
-//                    nextIndexFromIndex(nextIndex);
-//                    updateActiveImages();
-//                    showImages();
-//                }
-//            }
-//        });
-//    }
-
     public int getLenghtImages()
     {
-        return this.images.length;
+        return this.images.size();
     }
 
-    public void setActiveImages(ArrayList activeImages)
+    public void setImages(ArrayList images)
     {
-        this.activeImages = activeImages;
+        this.images = images;
     }
 
-    public void setActiveIndex(int activeIndex)
+    public ArrayList getImages()
     {
-        this.activeIndex = activeIndex;
+        return this.images;
     }
 
-    public ArrayList getActiveImages()
+    public void setIndex(int index)
     {
-        return this.activeImages;
+        this.index = index;
     }
 
-    public int getActiveIndex()
+    public int getIndex()
     {
-        return this.activeIndex;
+        return this.index;
     }
 }

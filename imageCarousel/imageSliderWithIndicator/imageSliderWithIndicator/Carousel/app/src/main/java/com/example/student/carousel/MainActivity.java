@@ -67,17 +67,16 @@ public class MainActivity extends AppCompatActivity
         onTouch = new OnTouch(relativeLayout, currentImageView, nextImageView, prevImageView,
                 radioGroup, radio1, radio2, radio3, radio4, radio5, getActiveImages(), getActiveIndex());
         onTouch.getOnTouch();
-        //onTouch.imageFromRadioButton();
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState)
     {
         super.onSaveInstanceState(outState);
-        setActiveImagesMain(onTouch.getActiveImages());
+        setActiveImagesMain(onTouch.getImages());
         outState.putIntegerArrayList("ACTIVE_IMAGES", activeImages);
 
-        setActiveIndexMain(onTouch.getActiveIndex());
+        setActiveIndexMain(onTouch.getIndex());
         outState.putInt("ACTIVE_INDEX", activeIndex);
     }
 
@@ -87,10 +86,10 @@ public class MainActivity extends AppCompatActivity
     {
         super.onRestoreInstanceState(savedInstanceState);
         activeImages = savedInstanceState.getIntegerArrayList("ACTIVE_IMAGES");
-        onTouch.setActiveImages(activeImages);
+        onTouch.setImages(activeImages);
 
         activeIndex = savedInstanceState.getInt("ACTIVE_INDEX");
-        onTouch.setActiveIndex(activeIndex);
+        onTouch.setIndex(activeIndex);
 
         onTouch.getOnTouch();
     }
