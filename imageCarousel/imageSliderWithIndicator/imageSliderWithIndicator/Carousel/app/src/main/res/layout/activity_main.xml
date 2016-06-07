@@ -13,14 +13,7 @@
         android:id="@+id/next_image_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginRight="10dp"
-        android:layout_alignParentRight="true"
         android:scaleType="fitXY"
-        android:src="@drawable/img2"
-        app:sriv_left_top_corner_radius="30dp"
-        app:sriv_right_top_corner_radius="30dp"
-        app:sriv_left_bottom_corner_radius="30dp"
-        app:sriv_right_bottom_corner_radius="30dp"
         app:sriv_border_width="2dip"
         app:sriv_border_color="#008fea"
         />
@@ -30,13 +23,7 @@
         android:id="@+id/prev_image_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
         android:scaleType="fitXY"
-        android:src="@drawable/bob3"
-        app:sriv_left_top_corner_radius="30dp"
-        app:sriv_right_top_corner_radius="30dp"
-        app:sriv_left_bottom_corner_radius="30dp"
-        app:sriv_right_bottom_corner_radius="30dp"
         app:sriv_border_width="2dip"
         app:sriv_border_color="#008fea"
         />
@@ -44,16 +31,9 @@
     <com.joooonho.SelectableRoundedImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/current_image_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:scaleType="fitXY"
-        android:src="@drawable/img1"
-        android:layout_centerHorizontal="true"
-        app:sriv_left_top_corner_radius="30dp"
-        app:sriv_right_top_corner_radius="30dp"
-        app:sriv_left_bottom_corner_radius="30dp"
-        app:sriv_right_bottom_corner_radius="30dp"
         app:sriv_border_width="2dip"
         app:sriv_border_color="#008fea"
         />
@@ -106,4 +86,3 @@
 
 
 </RelativeLayout>
-    

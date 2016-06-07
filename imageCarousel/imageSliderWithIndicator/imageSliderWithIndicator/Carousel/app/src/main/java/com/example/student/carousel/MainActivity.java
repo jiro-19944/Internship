@@ -7,6 +7,7 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -38,20 +39,19 @@ public class MainActivity extends AppCompatActivity
 //----------------- get Display metrics -----------------------
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        int width = metrics.widthPixels;
-        int height = metrics.heightPixels;
-
-//----------------- get Display rotation -----------------------
-
-        Display display = ((WindowManager) this.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-        int rotation = display.getRotation();
+        double width = metrics.widthPixels;
+        double height = metrics.heightPixels;
+        System.out.println("width = --------------------" + width);
+        System.out.println("height = --------------------" + height);
+        System.out.println("count = --------------------" +width / height);
 
 //------------------ set images positions --------------------------------
 
-        ImagePosition imagePosition = new ImagePosition(width, height);
-        imagePosition.setCurrentImagePosition(currentImageView, rotation);
-        imagePosition.setNextImagePosition(nextImageView, rotation);
-        imagePosition.setPrevImagePosition(prevImageView, rotation);
+        ImagePosition imagePosition = new ImagePosition(width, height, currentImageView, nextImageView, prevImageView);
+        imagePosition.countOfImages();
+//        imagePosition.setCurrentImagePosition(currentImageView);
+//        imagePosition.setNextImagePosition(nextImageView);
+//        imagePosition.setPrevImagePosition(prevImageView);
 
 //------------------- get radio group and radio buttons from XML by id ---------------------------------
 

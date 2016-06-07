@@ -111,11 +111,9 @@ public class OnTouch extends AppCompatActivity
 
     private void showImages()
     {
-        
         currentImageView.setImageResource((int)images.get(index));
         nextImageView.setImageResource((int)images.get(nextIndex));
         prevImageView.setImageResource((int)(images.get(prevIndex)));
-
     }
 
     public void radioButtonFromImage(String action)
