@@ -30,7 +30,7 @@
     <com.galust.slider.vanadzorimageslider.SliderLayout
         android:id="@+id/slider"
         android:layout_width="wrap_content"
-        custom:pager_animation="Accordion"
+        custom:pager_animation="DepthPage"
         custom:auto_cycle="true"
         custom:indicator_visibility="visible"
         custom:pager_animation_span="1100"

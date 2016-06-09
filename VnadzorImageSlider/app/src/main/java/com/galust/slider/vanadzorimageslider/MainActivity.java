@@ -22,44 +22,44 @@ public class MainActivity extends AppCompatActivity implements BaseSliderView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//
-//        mDemoSlider = (SliderLayout)findViewById(R.id.slider);
-//
-//        HashMap<String, String> url_maps = new HashMap<>();
-//        url_maps.put("Vanadzor centr", "http://vanadzor.ru/photo/vanadzor/gallery/20050601/10001.jpg");
-//        url_maps.put("Vanadzor hospital", "http://cs607124.vk.me/v607124114/24cc/GeOssO7EiZA.jpg");
-//        url_maps.put("Church","http://anitour.am/media/mediaelement/745/sanahin_monastery_1.jpg");
-//        url_maps.put("Culture house","http://photos.wikimapia.org/p/00/02/23/42/85_big.jpg");
-//        url_maps.put("Vanadzor governors hall","http://vanadzor.ru/photo/vanadzor/gallery/20040701/10001.jpg");
-//
-////        HashMap<String,Integer> file_maps = new HashMap<String, Integer>();
-////        file_maps.put("Vanadzori kulturai tun", R.drawable.vanadzorikulturaitun);
-////        file_maps.put("Vanadzori Marzpetarani Shenq", R.drawable.vanadzormarzpetaran);
-////        file_maps.put("Kayarani hraparak", R.drawable.kayaranihraparak);
-////        file_maps.put("Erekoyan Vanadzor", R.drawable.erekoyanvanadzor);
-//
-//
-//        for(String name : url_maps.keySet()){
-//            TextSliderView textSliderView = new TextSliderView(this);
-//            // initialize a SliderLayout
-////            textSliderView
-////                    .description(name)
-////                    .image(file_maps.get(name))
-////                    .setScaleType(BaseSliderView.ScaleType.CenterInside)
-////                    .setOnSliderClickListener(this);
-//
+
+        mDemoSlider = (SliderLayout)findViewById(R.id.slider);
+
+        HashMap<String, String> url_maps = new HashMap<>();
+        url_maps.put("Vanadzor centr", "http://vanadzor.ru/photo/vanadzor/gallery/20050601/10001.jpg");
+        url_maps.put("Vanadzor hospital", "http://cs607124.vk.me/v607124114/24cc/GeOssO7EiZA.jpg");
+        url_maps.put("Church","http://anitour.am/media/mediaelement/745/sanahin_monastery_1.jpg");
+        url_maps.put("Culture house","http://photos.wikimapia.org/p/00/02/23/42/85_big.jpg");
+        url_maps.put("Vanadzor governors hall","http://vanadzor.ru/photo/vanadzor/gallery/20040701/10001.jpg");
+
+        HashMap<String,Integer> file_maps = new HashMap<String, Integer>();
+        file_maps.put("Vanadzori kulturai tun", R.drawable.vanadzorikulturaitun);
+        file_maps.put("Vanadzori Marzpetarani Shenq", R.drawable.vanadzormarzpetaran);
+        file_maps.put("Kayarani hraparak", R.drawable.kayaranihraparak);
+        file_maps.put("Erekoyan Vanadzor", R.drawable.erekoyanvanadzor);
+
+
+        for(String name : file_maps.keySet()){
+            TextSliderView textSliderView = new TextSliderView(this);
+            // initialize a SliderLayout
+            textSliderView
+                    .description(name)
+                    .image(file_maps.get(name))
+                    .setScaleType(BaseSliderView.ScaleType.CenterInside)
+                    .setOnSliderClickListener(this);
+
 //            textSliderView
 //                    .description(name)
 //                    .image(url_maps.get(name))
 //                    .setScaleType(BaseSliderView.ScaleType.CenterInside)
 //                    .setOnSliderClickListener(this);
-//            mDemoSlider.addSlider(textSliderView);
-//        }
-////        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Accordion);
-////        mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-//        mDemoSlider.setCustomAnimation(new DescriptionAnimation());
-//        mDemoSlider.setDuration(4000);
-//        mDemoSlider.addOnPageChangeListener(this);
+            mDemoSlider.addSlider(textSliderView);
+        }
+        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.DepthPage);
+        mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+        mDemoSlider.setCustomAnimation(new DescriptionAnimation());
+        mDemoSlider.setDuration(4000);
+        mDemoSlider.addOnPageChangeListener(this);
     }
 
     @Override
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements BaseSliderView.On
 
     @Override
     public void onPageSelected(int position) {
-        Log.d("Slider Demo", "Page Changed: " + position);
+        Log.d("Slider Image Vanadzor", "Page Changed: " + position);
     }
 
     @Override
