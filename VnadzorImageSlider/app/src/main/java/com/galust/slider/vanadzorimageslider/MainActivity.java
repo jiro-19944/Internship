@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements BaseSliderView.On
             textSliderView
                     .description(name)
                     .image(file_maps.get(name))
-                    .setScaleType(BaseSliderView.ScaleType.CenterInside)
+                    .setScaleType(BaseSliderView.ScaleType.CenterCrop)
                     .setOnSliderClickListener(this);
 
 //            textSliderView
@@ -55,8 +55,8 @@ public class MainActivity extends AppCompatActivity implements BaseSliderView.On
 //                    .setOnSliderClickListener(this);
             mDemoSlider.addSlider(textSliderView);
         }
-        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.DepthPage);
-        mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.CubeIn);
+        mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Right_Bottom);
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
         mDemoSlider.setDuration(4000);
         mDemoSlider.addOnPageChangeListener(this);
