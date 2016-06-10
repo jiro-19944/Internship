@@ -15,30 +15,4 @@
         android:textAppearance="?android:attr/textAppearanceLarge">
     </ImageView>
 
-
-    <ImageView
-        android:id="@+id/currentImageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge">
-    </ImageView>
-
-    <ImageView
-        android:id="@+id/nextImageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge">
-    </ImageView>
-
-    <ImageView
-        android:id="@+id/prevImageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge">
-    </ImageView>
-
-
 </RelativeLayout>

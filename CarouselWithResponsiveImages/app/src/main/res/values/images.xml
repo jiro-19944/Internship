@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="images">
+        <item>img1</item>
+        <item>img2</item>
+        <item>img3</item>
+        <item>img4</item>
+        <item>img5</item>
+        <item>img6</item>
+        <item>img7</item>
+        <item>img8</item>
+        <item>img9</item>
+        <item>img10</item>
+        <item>bob1</item>
+        <item>bob2</item>
+        <item>bob3</item>
+    </string-array>
+</resources>

@@ -8,24 +8,17 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.text.Layout;
-import android.util.DisplayMetrics;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-
 
 public class MainActivity extends FragmentActivity
 {
     private static int PAGE_COUNT;
-    private static int width;
-    private static int height;
-
 
     ViewPager pager;
     PagerAdapter pagerAdapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -36,28 +29,10 @@ public class MainActivity extends FragmentActivity
         pagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(pagerAdapter);
 
-//----------------- get Display metrics -----------------------
-        DisplayMetrics metrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        width = metrics.widthPixels;
-        height = metrics.heightPixels;
-
-//----------------- get images from XML by id ---------------------
-
-        RelativeLayout upperLayout = (RelativeLayout) findViewById(R.id.main_layout);
-        ImageView currentImageView = (ImageView) findViewById(R.id.currentImageView);
-        ImageView nextImageView = (ImageView) findViewById(R.id.nextImageView);
-        ImageView prevImageView = (ImageView) findViewById(R.id.prevImageView);
-
-//------------------ set upper layout --------------------------------
-
-        UpperSide upperSide = new UpperSide(width, height, upperLayout);
-        upperSide.upperLayout();
-
         pager.setOnPageChangeListener(new OnPageChangeListener()
         {
             @Override
-            public void onPageSelected(int position) {
+           public void onPageSelected(int position) {
             }
 
             @Override
@@ -87,6 +62,11 @@ public class MainActivity extends FragmentActivity
             return getPAGE_COUNT();
         }
 
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return "Image " + position;
+        }
+
     }
 
     public static  void setPAGE_COUNT(int pageCount)
@@ -98,15 +78,4 @@ public class MainActivity extends FragmentActivity
     {
         return PAGE_COUNT;
     }
-
-    public static int getHeight()
-    {
-        return height;
-    }
-
-    public static int getWidth()
-    {
-        return width;
-    }
-
 }

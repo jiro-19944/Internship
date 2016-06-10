@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 public class PageFragment extends Fragment
 {
@@ -21,8 +20,8 @@ public class PageFragment extends Fragment
                             R.drawable.img7,
                             R.drawable.img8,
                             R.drawable.img9,
-                            R.drawable.img10};
-    private int imageIndex;
+                            R.drawable.img10,
+                            R.drawable.bob3};
 
     static PageFragment newInstance(int page)
     {
@@ -38,10 +37,6 @@ public class PageFragment extends Fragment
     {
         super.onCreate(savedInstanceState);
         pageNumber = getArguments().getInt(ARGUMENT_PAGE_NUMBER);
-
-        int height = MainActivity.getHeight();
-        int width = MainActivity.getWidth();
-
     }
 
     @Override
@@ -52,7 +47,6 @@ public class PageFragment extends Fragment
 
         MainActivity.setPAGE_COUNT(MainActivity.getPAGE_COUNT());
         mainImageView.setImageResource(images[pageNumber]);
-        System.out.println("pageNumber = --------- patrastec -------------- images[" + pageNumber + "]");
 
         return view;
     }
