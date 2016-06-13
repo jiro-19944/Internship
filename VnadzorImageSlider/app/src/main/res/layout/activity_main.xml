@@ -34,7 +34,7 @@
         custom:pager_animation="ZoomOutSlide"
         custom:auto_cycle="true"
         custom:indicator_visibility="visible"
-        custom:pager_animation_span="1100"
+        custom:pager_animation_span="1200"
         android:layout_height="wrap_content"
         android:background="@android:color/background_light"
         android:layout_centerVertical="true"
