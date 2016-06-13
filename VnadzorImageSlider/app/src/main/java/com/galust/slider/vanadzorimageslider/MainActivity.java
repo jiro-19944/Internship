@@ -55,8 +55,8 @@ public class MainActivity extends AppCompatActivity implements BaseSliderView.On
 //                    .setOnSliderClickListener(this);
             mDemoSlider.addSlider(textSliderView);
         }
-        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.CubeIn);
-        mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Right_Bottom);
+        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.ZoomOutSlide);
+        mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
         mDemoSlider.setDuration(4000);
         mDemoSlider.addOnPageChangeListener(this);
