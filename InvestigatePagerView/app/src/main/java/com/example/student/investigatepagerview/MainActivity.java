@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 
 public class MainActivity extends FragmentActivity
 {
@@ -29,18 +30,29 @@ public class MainActivity extends FragmentActivity
         pagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(pagerAdapter);
 
-        pager.setOnPageChangeListener(new OnPageChangeListener()
+        pager.addOnPageChangeListener(new OnPageChangeListener()
         {
             @Override
            public void onPageSelected(int position) {
+                Log.d("MMM", "onPageSelected");
             }
 
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                Log.d("MMM", "onPageScrolled");
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
+                Log.d("MMM", "onPageScrollStateChanged > " + state);
+
+                int index = pager.getCurrentItem();
+                Log.d("MMM", "index = " + index);
+                Log.d("MMM", "PAGE_COUT = " + PAGE_COUNT);
+                if (index == PAGE_COUNT - 1) {
+                    pagerAdapter.instantiateItem(pager, 0);
+                    pager.setCurrentItem(0);
+                }
             }
         });
     }
@@ -54,6 +66,7 @@ public class MainActivity extends FragmentActivity
 
         @Override
         public Fragment getItem(int position) {
+            Log.d("MMM", ">>> 0position = " + position);
             return PageFragment.newInstance(position);
         }
 
