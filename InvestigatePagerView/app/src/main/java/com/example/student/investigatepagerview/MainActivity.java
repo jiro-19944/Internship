@@ -12,7 +12,7 @@ import android.util.Log;
 
 public class MainActivity extends FragmentActivity
 {
-    private static final int PAGE_COUNT = 64000;
+    private static final int PAGE_COUNT = 64001;
     private int index = 0;
     ViewPager pager;
     PagerAdapter pagerAdapter;
@@ -23,7 +23,7 @@ public class MainActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        PageFragment pageFragment = new PageFragment();
+        final PageFragment pageFragment = new PageFragment();
         //PAGE_COUNT = Integer.MAX_VALUE - pageFragment.getImagesLength() * (Integer.MAX_VALUE / pageFragment.getImagesLength());
 
         pager = (ViewPager) findViewById(R.id.pager);
@@ -35,7 +35,7 @@ public class MainActivity extends FragmentActivity
             @Override
            public void onPageSelected(int position) {
 
-                //Log.d("MMM", "onPageSelected " + position);
+//                Log.d("MMM", "onPageSelected " + position);
             }
 
             @Override
@@ -46,8 +46,8 @@ public class MainActivity extends FragmentActivity
             @Override
             public void onPageScrollStateChanged(int state)
             {
-                Log.d("MMM", "onPageScrollStateChanged > " + pager.getCurrentItem());
-                Log.d("MMM", "onPageScrollStateChanged > Page_count " + PAGE_COUNT);
+//                Log.d("MMM", "state " + state);
+//                Log.d("MMM", "onPageScrollStateChanged > Page_count " + PAGE_COUNT);
                 if(0 != state)
                 {
                     index = state;
@@ -55,25 +55,13 @@ public class MainActivity extends FragmentActivity
                 else if(1 == index)
                 {
                     int currentItem = pager.getCurrentItem();
-                    if (PAGE_COUNT - 1 == currentItem)
+                    if (0 == currentItem)
                     {
-                        pagerAdapter.instantiateItem(pager, 0);
-                        pager.setCurrentItem(0);
-                    }
-                    else if(0 == currentItem)
-                    {
-                        pagerAdapter.instantiateItem(pager, PAGE_COUNT - 1);
-                        pager.setCurrentItem(PAGE_COUNT - 1);
+                        pagerAdapter.instantiateItem(pager, pageFragment.getImagesLength() - 1);
+                        pager.setCurrentItem(pageFragment.getImagesLength() - 1);
+                        pageFragment.setForce(pageFragment.getImagesLength() - 1);
                     }
                 }
-//
-//                int index = pager.getCurrentItem();
-////                Log.d("MMM", "index = " + index);
-////                Log.d("MMM", "PAGE_COUT = " + PAGE_COUNT);
-//                if (index == PAGE_COUNT - 1) {
-////                    pagerAdapter.instantiateItem(pager, 0);
-////                    pager.setCurrentItem(0);
-//                }
             }
         });
     }
@@ -88,7 +76,6 @@ public class MainActivity extends FragmentActivity
 
         @Override
         public Fragment getItem(int position) {
-            //Log.d("MMM", ">>> 0position = " + position);
             return PageFragment.newInstance(position);
         }
 
