@@ -24,7 +24,6 @@ public class MainActivity extends FragmentActivity
         setContentView(R.layout.activity_main);
 
 //        final PageFragment pageFragment = new PageFragment();
-
         pager = (ViewPager) findViewById(R.id.pager);
         pagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(pagerAdapter);
@@ -95,5 +94,6 @@ public class MainActivity extends FragmentActivity
     public static int getPAGE_COUNT()
     {
         return PAGE_COUNT;
-    }*/
+    }
+*/
 }
