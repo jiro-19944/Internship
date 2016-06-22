@@ -8,24 +8,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 public class MyFragment extends Fragment
 {
     private static int[] images = { R.drawable.img1,
-            R.drawable.img2,
-            R.drawable.img3,
-            R.drawable.img4,
-            R.drawable.img5,
-            R.drawable.img6,
-            R.drawable.img7,
-            R.drawable.img8,
-            R.drawable.img9,
-            R.drawable.img10};
+                                    R.drawable.img2,
+                                    R.drawable.img3,
+                                    R.drawable.img4,
+                                    R.drawable.img5,
+                                    R.drawable.img6,
+                                    R.drawable.img7,
+                                    R.drawable.img8,
+                                    R.drawable.img9,
+                                    R.drawable.img10};
     public static Fragment newInstance(MainActivity context, int pos)
     {
         Bundle bundle = new Bundle();
         bundle.putInt("pos", pos);
-        bundle.putFloat("scale", MainActivity.BIG_SCALE);
+        bundle.putFloat("scale", MainActivity.SCALE);
         return Fragment.instantiate(context, MyFragment.class.getName(), bundle);
     }
 
@@ -34,14 +35,24 @@ public class MyFragment extends Fragment
     {
         if (container == null)
         {
+            Log.d("log","container == null .... ");
             return null;
         }
-        LinearLayout layout = (LinearLayout)inflater.inflate(R.layout.fragment, container, false);
+        RelativeLayout layout = (RelativeLayout)inflater.inflate(R.layout.fragment, container, false);
 
         int pos = this.getArguments().getInt("pos");
-        ImageView imageView = (ImageView) layout.findViewById(R.id.imageView);
-        imageView.setImageResource(images[pos]);
+        ImageView firstImage = (ImageView) layout.findViewById(R.id.firstImage);
+//        ImageView secondImage = (ImageView) layout.findViewById(R.id.secondImage);
+//        ImageView thirdImage = (ImageView) layout.findViewById(R.id.thirdImage);
+/*
 
+        ImagePosition imagePosition = new ImagePosition(firstImage);
+        imagePosition.countOfImages();
+*/
+
+        firstImage.setImageResource(images[pos]);
+
+        Log.d("log", "position ... " + pos);
         return layout;
     }
 

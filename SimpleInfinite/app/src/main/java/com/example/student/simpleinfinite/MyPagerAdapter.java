@@ -36,4 +36,9 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter implements ViewPag
 
     @Override
     public void onPageScrollStateChanged(int state) {}
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return "Image " + (position % MyFragment.getImagesLength());
+    }
 }
