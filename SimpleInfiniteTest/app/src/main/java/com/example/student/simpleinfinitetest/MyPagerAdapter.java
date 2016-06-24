@@ -44,25 +44,23 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter implements ViewPag
         return "Image " + (position % MyFragment.getImagesLength());
     }
 
-/*
-    @Override
-    public boolean isViewFromObject(View view, Object object) {
-        return super.isViewFromObject(view, object);
-}*/
     @Override
     public float getPageWidth(int position) {
-        if(MainActivity.layoutWidth / MainActivity.layoutHeight < 1.5)
+        Log.d("log", "LayoutWidth  .. " + MainActivity.layoutWidth );
+        Log.d("log", "Width / height .. " + MainActivity.layoutWidth / MainActivity.layoutHeight);
+        if(MainActivity.layoutWidth / MainActivity.layoutHeight < 1)
         {
             pageWidth = 1f;
         }
-        else if(MainActivity.layoutWidth / MainActivity.layoutHeight >= 1.5 && MainActivity.layoutWidth / MainActivity.layoutHeight < 2.5)
+        else if(MainActivity.layoutWidth / MainActivity.layoutHeight >= 1 && MainActivity.layoutWidth / MainActivity.layoutHeight < 2)
         {
-            pageWidth = 0.5f;
+            pageWidth = 1f / (MainActivity.layoutWidth / MainActivity.layoutHeight) * 1f;
         }
         else
         {
-            pageWidth = 1f / 3f;
+            pageWidth = 1f / (MainActivity.layoutWidth / MainActivity.layoutHeight) * 1f;
         }
         return(pageWidth);
     }
+
 }

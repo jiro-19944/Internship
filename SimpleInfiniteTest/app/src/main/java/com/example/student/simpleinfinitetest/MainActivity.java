@@ -3,6 +3,7 @@ package com.example.student.simpleinfinitetest;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -36,6 +37,15 @@ public class MainActivity extends FragmentActivity
         layoutHeight = layout.getMeasuredHeight();
 
         pager = (ViewPager) findViewById(R.id.myviewpager);
+/*
+        ----------------- set pager metrics -----------------------
+
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) pager.getLayoutParams();
+        params.width = layoutWidth;
+        params.height = layoutHeight;
+        Log.d("log", "width  .... " + params.width);
+        Log.d("log", "height .... " + params.height);
+*/
 
         adapter = new MyPagerAdapter(this, this.getSupportFragmentManager());
         pager.setAdapter(adapter);

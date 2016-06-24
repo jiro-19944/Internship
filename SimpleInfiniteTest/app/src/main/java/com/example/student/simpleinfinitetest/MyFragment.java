@@ -1,5 +1,6 @@
 package com.example.student.simpleinfinitetest;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -43,6 +44,12 @@ public class MyFragment extends Fragment
 
         int pos = this.getArguments().getInt("pos");
         ImageView firstImage = (ImageView) layout.findViewById(R.id.firstImage);
+
+        Drawable image = getResources().getDrawable(images[pos]);
+        int h = image.getIntrinsicHeight();
+        int w = image.getIntrinsicWidth();
+/*        Log.d("log", "image .... " + pos + "- rd  =  "+ w);
+        Log.d("log", "image .... " + pos + "- rd  =  "+ h);*/
         firstImage.setImageResource(images[pos]);
 
         return layout;
