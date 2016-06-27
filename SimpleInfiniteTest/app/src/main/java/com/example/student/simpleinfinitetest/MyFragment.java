@@ -48,8 +48,9 @@ public class MyFragment extends Fragment
         Drawable image = getResources().getDrawable(images[pos]);
         int h = image.getIntrinsicHeight();
         int w = image.getIntrinsicWidth();
-/*        Log.d("log", "image .... " + pos + "- rd  =  "+ w);
-        Log.d("log", "image .... " + pos + "- rd  =  "+ h);*/
+/*      Log.d("log", "image .... " + pos + "- rd  =  "+ w);
+        Log.d("log", "image .... " + pos + "- rd  =  "+ h);
+*/
         firstImage.setImageResource(images[pos]);
 
         return layout;

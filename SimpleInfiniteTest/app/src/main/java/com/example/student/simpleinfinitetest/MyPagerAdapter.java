@@ -41,13 +41,15 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter implements ViewPag
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return "Image " + (position % MyFragment.getImagesLength());
+        return "Image " + (position % MyFragment.getImagesLength() + 1);
     }
 
     @Override
-    public float getPageWidth(int position) {
-        Log.d("log", "LayoutWidth  .. " + MainActivity.layoutWidth );
-        Log.d("log", "Width / height .. " + MainActivity.layoutWidth / MainActivity.layoutHeight);
+    public float getPageWidth(int position)
+    {
+
+        MainActivity.myOnGlobalLayoutListener.onGlobalLayout();
+       // Log.d("log", "Width / height .. " + MainActivity.layoutWidth / MainActivity.layoutHeight);
         if(MainActivity.layoutWidth / MainActivity.layoutHeight < 1)
         {
             pageWidth = 1f;
