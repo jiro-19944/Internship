@@ -9,7 +9,6 @@ import android.util.Log;
 public class MyPagerAdapter extends FragmentStatePagerAdapter implements ViewPager.OnPageChangeListener
 {
     private MainActivity context;
-    private static float pageWidth = 0;
 
     public MyPagerAdapter(MainActivity context, FragmentManager fm)
     {
@@ -47,19 +46,21 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter implements ViewPag
     @Override
     public float getPageWidth(int position)
     {
-            if(MainActivity.layoutWidth / MainActivity.layoutHeight < 1)
-            {
-                pageWidth = 1f;
-            }
-            else if(MainActivity.layoutWidth / MainActivity.layoutHeight >= 1 && MainActivity.layoutWidth / MainActivity.layoutHeight < 2)
-            {
-                pageWidth = 1f / (MainActivity.layoutWidth / MainActivity.layoutHeight) * 1f;
-            }
-            else
-            {
-                pageWidth = 1f / (MainActivity.layoutWidth / MainActivity.layoutHeight) * 1f;
-            }
-            Log.d("log", "Width / height ..  " + MainActivity.layoutWidth + "   " + MainActivity.layoutHeight);
+        float pageWidth = 0;
+
+        if(MainActivity.layoutWidth / (1.0 *  (MainActivity.layoutHeight - MainActivity.pagerTabStrip)) < 1)
+        {
+            pageWidth = 1f;
+        }
+        else if(MainActivity.layoutWidth / (1.0 *  (MainActivity.layoutHeight - MainActivity.pagerTabStrip)) >= 1 && MainActivity.layoutWidth / (1.0 *  (MainActivity.layoutHeight - MainActivity.pagerTabStrip)) < 2)
+        {
+            pageWidth = 1f / (MainActivity.layoutWidth / MainActivity.layoutHeight) * 1f;
+        }
+        else
+        {
+            pageWidth = 1f / (MainActivity.layoutWidth / MainActivity.layoutHeight) * 1f;
+        }
+        MyFragment.setPageWidth(pageWidth * MainActivity.layoutWidth);
 
         return(pageWidth);
     }

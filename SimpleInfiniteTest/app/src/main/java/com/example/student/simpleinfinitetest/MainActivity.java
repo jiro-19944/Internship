@@ -1,156 +1,62 @@
 package com.example.student.simpleinfinitetest;
 
-import android.annotation.TargetApi;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.widget.LinearLayout;
+import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 public class MainActivity extends FragmentActivity
 {
-/*
-    You can choose a bigger number for LOOPS, but you know, nobody will fling
-    more than 1000 times just in order to test your "infinite" ViewPager :D
-*/
     public final static int loops = 1000;
     public final static int firstPage = MyFragment.getImagesLength() * loops / 2;
     public final static float scale = 1.0f;
     public static int layoutWidth = 0;
     public static int layoutHeight = 0;
     public static RelativeLayout layout;
+    public static final float pagerTabStrip = 30;
     private ViewPager pager;
     private MyPagerAdapter adapter;
-    public static RelativeLayout.LayoutParams layoutParams;
-    public static ViewTreeObserver.OnPreDrawListener onPreDrawListener;
-    public static ViewTreeObserver.OnGlobalLayoutListener onGlobalLayoutListener;
-
-/*
-    public MyPagerAdapter adapter;
-    public ViewPager pager;
-*/
 
     @Override
-    public void onWindowFocusChanged(boolean hasFocus)
-    {
-        Log.d("log", "onWindowFocusChanged   ............." );
-//        onPreDrawListener.onPreDraw();
-        layoutWidth = layout.getMeasuredWidth();
-        layoutHeight = layout.getMeasuredHeight();
-        Log.d("log", "onGlobalLayout   .............layoutWidth  ...  " + layoutWidth);
-        Log.d("log", "onGlobalLayout   .............layoutHeight ...  " + layoutHeight);
-
-
-
-
-
-
-        adapter = new MyPagerAdapter(this, this.getSupportFragmentManager());
-        pager.setAdapter(adapter);
-        pager.addOnPageChangeListener(adapter);
-/*
-         Set current item to the middle page so we can fling to both
-         directions left and right
-*/
-        pager.setCurrentItem(firstPage);
-/*
-         Necessary or the pager will only have one extra page to show
-         make this at least however many pages you can see
-*/
-        pager.setOffscreenPageLimit(1);
-
-        super.onWindowFocusChanged(hasFocus);
-    }
-
     public void onCreate(final Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.include_in);
+
         layout = (RelativeLayout)findViewById(R.id.custom_layout);
         layout.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
-        Log.d("log", "onCreate   ............." );
+        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) layout.getLayoutParams();
 
-/*        onPreDrawListener = new ViewTreeObserver.OnPreDrawListener()
-        {
-            @Override
-            public boolean onPreDraw()
-            {
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
-                    layoutWidth = layout.getMeasuredWidth();
-                    layoutHeight = layout.getMeasuredHeight();
-                    Log.d("log", "onGlobalLayout   .............layoutWidth  ...  " + layoutWidth);
-                    Log.d("log", "onGlobalLayout   .............layoutHeight ...  " + layoutHeight);
-
-
-                return true;
-            }
-        };*/
-
-
-/*
-        ----------------- get Layout metrics -----------------------
-
-        layout.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
         layoutWidth = layout.getMeasuredWidth();
         layoutHeight = layout.getMeasuredHeight();
-*/
-/*
-        layoutWidth = layout.getLayoutParams().width;
-        layoutHeight = layout.getLayoutParams().height;
 
-        return values is "-1` match_parent   or -2` wrap_content"
-*/
+        if(layoutWidth == 0){
+            layoutWidth = metrics.widthPixels;
+            layoutWidth -= layoutParams.leftMargin;
+            layoutWidth -= layoutParams.rightMargin;
+        }
+        if(layoutHeight == 0){
+            layoutHeight = metrics.heightPixels;
+            layoutHeight -= layoutParams.topMargin;
+            layoutHeight -= layoutParams.bottomMargin;
+        }
+
+        MyFragment.setPageHeight(layoutHeight - pagerTabStrip);
+
         pager = (ViewPager) findViewById(R.id.myviewpager);
-/*
-        ----------------- set pager metrics -----------------------
 
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) pager.getLayoutParams();
-        params.width = layoutWidth;
-        params.height = layoutHeight;
-        Log.d("log", "width  .... " + params.width);
-        Log.d("log", "height .... " + params.height);
-*/
+        adapter = new MyPagerAdapter(this, this.getSupportFragmentManager());
 
-/*
-         Set margin for pages as a negative number, so a part of next and
-         previous pages will be showed
-*/
+        pager.setAdapter(adapter);
+        pager.addOnPageChangeListener(adapter);
+        pager.setCurrentItem(firstPage);
+        pager.setOffscreenPageLimit(1);
     }
-
-
-    public static void setMeasuredDimensions()
-    {
-
-/*        onGlobalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener()
-        {
-            @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-            @Override
-            public void onGlobalLayout()
-            {
-                if (Build.VERSION.SDK_INT<16) {
-                    layout.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                } else {
-                    layout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                }
-
-                layoutWidth  = layout.getMeasuredWidth();
-                layoutHeight = layout.getMeasuredHeight();
-                Log.d("log", "onGlobalLayout   .............layoutWidth  ...  " + layoutWidth);
-                Log.d("log", "onGlobalLayout   .............layoutHeight ...  " + layoutHeight);
-            }
-
-        };*/
-    }
-/*    public int viewWidth(View view) {
-        view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
-        Log.d("log", "viewWidth   ............." + layoutWidth);
-        return view.getMeasuredWidth();
-    }*/
 }
