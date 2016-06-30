@@ -60,7 +60,7 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter implements ViewPag
         {
             pageWidth = 1f / (MainActivity.layoutWidth / MainActivity.layoutHeight) * 1f;
         }
-        MyFragment.setPageWidth(pageWidth * MainActivity.layoutWidth);
+        MyFragment.setPageWidth((int)pageWidth * MainActivity.layoutWidth);
 
         return(pageWidth);
     }

@@ -1,5 +1,7 @@
 package com.example.student.simpleinfinitetest;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,7 +14,7 @@ import android.widget.RelativeLayout;
 
 public class MyFragment extends Fragment
 {
-    private static float cardWidth = 0;
+    private static int cardWidth = 0;
     private static float cardHeight = 0;
     private static int[] images = { R.drawable.img1,
                                     R.drawable.img2,
@@ -26,7 +28,13 @@ public class MyFragment extends Fragment
                                     R.drawable.img10,
                                     R.drawable.bob1,
                                     R.drawable.bob2,
-                                    R.drawable.bob3};
+                                    R.drawable.bob3,
+                                    R.drawable.ic_launcher,
+                                    R.drawable.img14,
+                                    R.drawable.img15,
+                                    R.drawable.img16,
+                                    R.drawable.img17,
+                                    R.drawable.img18};
 
     public static Fragment newInstance(MainActivity context, int pos)
     {
@@ -47,18 +55,44 @@ public class MyFragment extends Fragment
 
         int pos = this.getArguments().getInt("pos");
         ImageView firstImage = (ImageView) layout.findViewById(R.id.firstImage);
-
+/*
         Drawable image = getResources().getDrawable(images[pos]);
         int imageWidth = image.getIntrinsicWidth();
         int imageHeight = image.getIntrinsicHeight();
+*/
 
-/*        Log.d("log", "image .... " + pos + "- rd  =  " + imageWidth);
-        Log.d("log", "image .... " + pos + "- rd  =  " + imageHeight);*/
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), images[pos]);
+        int bitmapWidth = bitmap.getWidth();
+        int bitmapHeight = bitmap.getHeight();
+/*
+
+
+        Log.d("log", "bitmap ....  " + pos + "- rd  =  " + bitmapWidth);
+        Log.d("log", "bitmap ....  " + pos + "- rd  =  " + bitmapHeight);
         Log.d("log", "cardWidth   .... " + pos + "- rd  =  " + cardWidth);
         Log.d("log", "cardHeight  .... " + pos + "- rd  =  " + cardHeight);
         Log.d("log", ".............................................");
+*/
 
-        firstImage.setImageResource(images[pos]);
+        int halfWidth = bitmapWidth / 2;
+        int halfHeight = bitmapHeight / 2;
+
+        if(bitmapWidth < bitmapHeight)
+        {
+            double k = cardWidth / bitmapWidth;
+            Log.d("log", "............................................." + k);
+
+        }
+
+        Bitmap tmp = Bitmap.createBitmap(halfWidth, halfHeight, Bitmap.Config.ARGB_8888);
+        int[] pixels = new int[halfWidth * halfHeight];
+
+        bitmap.getPixels(pixels, 0, halfWidth, halfWidth , halfHeight , halfWidth, halfHeight);
+        tmp.setPixels(pixels, 0, halfWidth, 0, 0, halfWidth, halfHeight);
+
+        firstImage.setImageBitmap(tmp);
+
+//        firstImage.setImageResource(images[pos]);
 
         return layout;
     }
@@ -72,7 +106,7 @@ public class MyFragment extends Fragment
         return cardWidth;
     }
 
-    public static void setPageWidth(float pageWidth) {
+    public static void setPageWidth(int pageWidth) {
         cardWidth = pageWidth;
     }
 
